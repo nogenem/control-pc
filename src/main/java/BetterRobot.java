@@ -4,7 +4,7 @@ import java.awt.event.KeyEvent;
 
 public class BetterRobot {
 	// BASED ON: https://stackoverflow.com/a/39141846
-
+	
     private Robot robot;
 
     public BetterRobot() throws AWTException {
