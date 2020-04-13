@@ -31,4 +31,20 @@ public class Controller {
 		
 		return "Empty command.";
 	}
+	
+	public String type(Request req, Response res) {
+		MultiMap<String> params = new MultiMap<String>();
+		UrlEncoded.decodeTo(req.body(), params, "UTF-8");
+		
+		String text = params.getString("text");
+		
+		System.out.println("Text: "+ text);
+		if(!text.equals("")) {
+			this.robot.type(text);
+			
+			return "Text typed: " +text;
+		}
+		
+		return "Empty text.";
+	}
 }

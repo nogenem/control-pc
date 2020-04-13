@@ -56,6 +56,7 @@ public class Main {
 	
 	private static void setupRoutes() {
 		Spark.post("/exec", (req, res) -> controller.exec(req, res));
+		Spark.post("/type", (req, res) -> controller.type(req, res));
 	}
 
 	private static void registerShutdownThread() {

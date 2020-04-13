@@ -1,8 +1,10 @@
 $(function() {
   const EXEC_URL = window.location.origin + '/exec';
+  const TYPE_URL = window.location.origin + '/type';
 
   const commandsSelect = $('#command-select');
   const commandsCheckboxes = $('.checkboxes-wrapper > p input');
+  const textarea = $('#text-command');
 
   commandsSelect.select2({
     width: '100%',
@@ -58,12 +60,32 @@ $(function() {
     });
   });
 
+  $('#send-text').click(function() {
+    const text = $.trim(textarea.val());
+
+    sendText(text);
+  });
+
+  $('#clear-text').click(function() {
+    textarea.val('');
+  });
+
   function sendCommands(commands) {
     $.ajax({
       url: EXEC_URL,
       method: 'POST',
       data: {
         commands
+      }
+    });
+  }
+
+  function sendText(text) {
+    $.ajax({
+      url: TYPE_URL,
+      method: 'POST',
+      data: {
+        text
       }
     });
   }
