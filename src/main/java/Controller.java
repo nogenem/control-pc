@@ -1,5 +1,9 @@
 import java.awt.AWTException;
-import org.json.JSONArray;
+import java.util.List;
+
+import org.eclipse.jetty.util.MultiMap;
+import org.eclipse.jetty.util.UrlEncoded;
+
 import spark.Request;
 import spark.Response;
 
@@ -12,26 +16,18 @@ public class Controller {
 	
 	// http://sparkjava.com/
 	public String exec(Request req, Response res) {
-		String cmd = req.queryParamOrDefault("command", "[]");
-		if(!cmd.equals("[]")) {
-			JSONArray tmpArr = new JSONArray(cmd);
-			String[] commands = this.toStringArray(tmpArr);
+		MultiMap<String> params = new MultiMap<String>();
+		UrlEncoded.decodeTo(req.body(), params, "UTF-8");
+		
+		List<String> cmds = params.get("commands[]");
+		
+		if(cmds != null && cmds.size() > 0) {
+			String[] commands = cmds.toArray(new String[0]);
 			this.robot.exec(commands);
 			
-			return "Command executed: " +cmd;
+			return "Commands executed: " +cmds;
 		}
 		
 		return "Empty command.";
-	}
-	
-	private String[] toStringArray(JSONArray array) {
-	    if(array == null)
-	        return null;
-
-	    String[] arr = new String[array.length()];
-	    for(int i = 0; i < arr.length; i++) {
-	        arr[i] = array.optString(i);
-	    }
-	    return arr;
 	}
 }

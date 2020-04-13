@@ -1,0 +1,33 @@
+.headline {
+    margin-top: 0;
+}
+
+.headline.margintop {
+    margin-top: 15px;
+}
+
+.row .col.small-margintop {
+    margin-top: 10px;
+}
+
+.media-controls-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.media-controls-wrapper > div {
+    display: flex;
+}
+
+ 
+.media-controls-wrapper button {
+    margin: 5px;
+    width: 52px;
+}
+
+.media-controls-wrapper button.dont-show {
+    visibility: hidden;
+}
+

@@ -1,5 +1,6 @@
 import java.awt.AWTException;
 import java.net.InetAddress;
+import java.net.URL;
 import java.net.UnknownHostException;
 
 import spark.Spark;
@@ -30,7 +31,14 @@ public class Main {
 //		ipAddress(Main.IP_ADRESS);
 		Spark.port(Main.PORT);
 		
-		Spark.staticFiles.location("/public");
+//		Spark.staticFiles.location("/public");
+		if (!Main.isInsideJar()) {
+		    String projectDir = System.getProperty("user.dir");
+		    String staticDir = "/src/main/resources/public";
+		    Spark.staticFiles.externalLocation(projectDir + staticDir);
+		} else {
+			Spark.staticFiles.location("/public");
+		}
 		
 		Spark.exception(Exception.class, (e, req, res) -> {
 			String msg = e.getMessage();
@@ -47,7 +55,7 @@ public class Main {
 	}
 	
 	private static void setupRoutes() {
-		Spark.get("/exec", (req, res) -> controller.exec(req, res));
+		Spark.post("/exec", (req, res) -> controller.exec(req, res));
 	}
 
 	private static void registerShutdownThread() {
@@ -57,6 +65,11 @@ public class Main {
 		            if(Main.ahkFileHandler != null) Main.ahkFileHandler.stop();
 		        }
 		    }, "Shutdown-thread"));
+	}
+	
+	private static boolean isInsideJar() {
+		URL path = Main.class.getResource("Main.class");
+		return path != null ? path.toString().startsWith("jar:") : false;
 	}
 	
 	private static String getIpAdress() {

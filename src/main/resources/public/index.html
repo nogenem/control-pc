@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- <link href="//cdn.muicss.com/mui-0.10.1/css/mui.min.css" rel="stylesheet" type="text/css" /> -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="main.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    <div class="row">
+      <div class="col s12 m6 offset-m3">
+        <div class="card">
+          <div class="card-content">
+
+            <h5 class="headline">Media Controls</h5>
+
+            <div class="media-controls-wrapper">
+              <div>
+                <button class="waves-effect waves-light btn dont-show"></button>
+                <button class="waves-effect waves-light btn" title="Volume up" data-commands='["_volume_up_"]'>
+                  <i class="material-icons">volume_up</i>
+                </button>
+                <button class="waves-effect waves-light btn dont-show"></button>
+              </div>
+              <div>
+                <button class="waves-effect waves-light btn" title="Skip previous" data-commands='["_skip_previous_"]'>
+                  <i class="material-icons">skip_previous</i>
+                </button>
+                <button class="waves-effect waves-light btn" title="Play/Pause" data-commands='["_ctrl_", "_f7_"]'>
+                  <i class="material-icons">play_arrow</i>
+                </button>
+                <button class="waves-effect waves-light btn" title="Skip next" data-commands='["_skip_next_"]'>
+                  <i class="material-icons">skip_next</i>
+                </button>
+              </div>
+              <div>
+                <button class="waves-effect waves-light btn" title="Mute/Unmute" data-commands='["_mute_"]'>
+                  <i class="material-icons">volume_off</i>
+                </button>
+                <button class="waves-effect waves-light btn" title="Volume down" data-commands='["_volume_down_"]'>
+                  <i class="material-icons">volume_down</i>
+                </button>
+                <button class="waves-effect waves-light btn dont-show"></button>
+              </div>
+            </div> <!-- Media Controls -->
+
+          </div>
+        </div> <!-- Card -->
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- <script src="//cdn.muicss.com/mui-0.10.1/js/mui.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
