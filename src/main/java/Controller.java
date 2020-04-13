@@ -21,6 +21,7 @@ public class Controller {
 		
 		List<String> cmds = params.get("commands[]");
 		
+		System.out.println("Cmds: "+ cmds);
 		if(cmds != null && cmds.size() > 0) {
 			String[] commands = cmds.toArray(new String[0]);
 			this.robot.exec(commands);

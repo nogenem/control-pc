@@ -467,6 +467,15 @@ public class BetterRobot {
     		case "_print_":
     			doExec(KeyEvent.VK_PRINTSCREEN);
     			break;
+    		case "_home_":
+    			doExec(KeyEvent.VK_HOME);
+    			break;
+    		case "_end_":
+    			doExec(KeyEvent.VK_END);
+    			break;
+    		case "_insert_":
+    			doExec(KeyEvent.VK_INSERT);
+    			break;
     		case "_f1_":
     			doExec(KeyEvent.VK_F1);
     			break;
@@ -508,11 +517,9 @@ public class BetterRobot {
     	}
     }
     
-
     private void doExec(int... keyCodes) {
     	doExec(keyCodes, 0, keyCodes.length);
     }
-    
     
     private void doExec(int[] keyCodes, int offset, int length) {
     	if (length == 0) {

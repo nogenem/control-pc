@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
     <link href="main.css" rel="stylesheet" type="text/css">
   </head>
   <body>
@@ -31,7 +32,7 @@
                 <button class="waves-effect waves-light btn" title="Skip previous" data-commands='["_skip_previous_"]'>
                   <i class="material-icons">skip_previous</i>
                 </button>
-                <button class="waves-effect waves-light btn" title="Play/Pause" data-commands='["_ctrl_", "_f7_"]'>
+                <button class="waves-effect waves-light btn" title="Play/Pause" data-commands='["_play_pause_"]'>
                   <i class="material-icons">play_arrow</i>
                 </button>
                 <button class="waves-effect waves-light btn" title="Skip next" data-commands='["_skip_next_"]'>
@@ -49,6 +50,81 @@
               </div>
             </div> <!-- Media Controls -->
 
+            <h5 class="headline margintop">Commands</h5>
+
+            <div class="row">
+              <div class="input-field small-margintop col s12 m6 offset-m3">
+                <select name="command-select" id="command-select" multiple="multiple">
+                  <option value="_esc_">Escape</option>
+                  <option value="_tab_">Tab</option>
+                  <option value="_capslock_">Capslock</option>
+                  <option value="_backspace_">Backspace</option>
+                  <option value="_enter_">Enter</option>
+                  <option value="_context_menu_">Context Menu</option>
+                  <option value="_num_lock_">Num Lock</option>
+                  <option value="_page_up_">Page up</option>
+                  <option value="_page_down_">Page down</option>
+                  <option value="_delete_">Delete</option>
+                  <option value="_print_">Print Screen</option>
+                  <option value="_home_">Home</option>
+                  <option value="_end_">End</option>
+                  <option value="_insert_">Insert</option>
+                  <option value="_f1_">F1</option>
+                  <option value="_f2_">F2</option>
+                  <option value="_f3_">F3</option>
+                  <option value="_f4_">F4</option>
+                  <option value="_f5_">F5</option>
+                  <option value="_f6_">F6</option>
+                  <option value="_f7_">F7</option>
+                  <option value="_f8_">F8</option>
+                  <option value="_f9_">F9</option>
+                  <option value="_f10_">F10</option>
+                  <option value="_f11_">F11</option>
+                  <option value="_f12_">F12</option>
+                </select>
+              </div>
+              <div class="col s12 m6 offset-m3 checkboxes-wrapper">
+                <p>
+                  <label>
+                    <input type="checkbox" data-command='_shift_' />
+                    <span>Shift</span>
+                  </label>
+                </p>
+                <p>
+                  <label>
+                    <input type="checkbox" data-command='_ctrl_' />
+                    <span>Ctrl</span>
+                  </label>
+                </p>
+                <p>
+                  <label>
+                    <input type="checkbox" data-command='_win_' />
+                    <span>Win</span>
+                  </label>
+                </p>
+                <p>
+                  <label>
+                    <input type="checkbox" data-command='_alt_' />
+                    <span>Alt</span>
+                  </label>
+                </p>
+                <p>
+                  <label>
+                    <input type="checkbox" data-command='_alt_gr_' />
+                    <span>Alt GR</span>
+                  </label>
+                </p>
+              </div>
+              <div class="input-field col s12 m8 offset-m2">
+                <button class="waves-effect waves-light btn" id="send-commands">
+                  Send
+                </button>
+                <button class="waves-effect waves-light btn" id="clear-commands">
+                  Clear
+                </button>
+              </div>
+            </div>
+            
           </div>
         </div> <!-- Card -->
       </div>
@@ -57,6 +133,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <!-- <script src="//cdn.muicss.com/mui-0.10.1/js/mui.min.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
     <script src="main.js"></script>
   </body>
 </html>
