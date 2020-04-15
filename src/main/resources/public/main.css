@@ -42,6 +42,51 @@
     margin-left: 6px !important;
 }
 
+.mouse-area-p {
+    margin-bottom: 15px !important;
+}
+
+.mouse-area {
+    min-height: 250px !important;
+    position: relative;
+}
+
+.mouse-area::before, 
+.mouse-area::after, 
+.mouse-area > span::before, 
+.mouse-area > span::after {
+    display: block;
+    content: "";
+    width: 20px;
+    height: 20px;
+    position: absolute;
+}
+
+.mouse-area::before {
+    top: -2px;
+    left: -2px;
+    border-top: 2px solid black;
+    border-left: 2px solid black;
+}
+.mouse-area::after {
+    top: -2px;
+    right: -2px;
+    border-top: 2px solid black;
+    border-right: 2px solid black;
+}
+.mouse-area > span::before {
+    bottom: -2px;
+    left: -2px;
+    border-bottom: 2px solid black;
+    border-left: 2px solid black;
+}
+.mouse-area > span::after {
+    bottom: -2px;
+    right: -2px;
+    border-bottom: 2px solid black;
+    border-right: 2px solid black;
+}
+
 /* Arrumar bug entre materialize e select2 */
 .select2-search.select2-search--inline > input.select2-search__field {
     height: inherit !important;

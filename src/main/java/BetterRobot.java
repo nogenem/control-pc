@@ -1,6 +1,11 @@
 import java.awt.AWTException;
+import java.awt.MouseInfo;
+import java.awt.Point;
+import java.awt.PointerInfo;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
+
+import org.json.JSONArray;
 
 public class BetterRobot {
 	// BASED ON: https://stackoverflow.com/a/39141846
@@ -529,5 +534,21 @@ public class BetterRobot {
         robot.keyPress(keyCodes[offset]);
         doType(keyCodes, offset + 1, length - 1);
         robot.keyRelease(keyCodes[offset]);
+    }
+    
+    /* Move Mouse */
+    public void move_mouse(JSONArray movements) {
+    	PointerInfo a = MouseInfo.getPointerInfo();
+    	Point b = a.getLocation();
+    	int x = (int) b.getX();
+    	int y = (int) b.getY();
+    	
+    	for(int i = 0; i < movements.length(); i++) {
+    		JSONArray pos = (JSONArray) movements.get(i);
+    		x += pos.getInt(0);
+    		y += pos.getInt(1);
+    		
+	    	this.robot.mouseMove(x, y);    		
+    	}
     }
 }

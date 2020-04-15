@@ -3,6 +3,7 @@ import java.util.List;
 
 import org.eclipse.jetty.util.MultiMap;
 import org.eclipse.jetty.util.UrlEncoded;
+import org.json.JSONArray;
 
 import spark.Request;
 import spark.Response;
@@ -43,6 +44,23 @@ public class Controller {
 			this.robot.type(text);
 			
 			return "Text typed: " +text;
+		}
+		
+		return "Empty text.";
+	}
+	
+	public String move_mouse(Request req, Response res) {
+		MultiMap<String> params = new MultiMap<String>();
+		UrlEncoded.decodeTo(req.body(), params, "UTF-8");
+		
+		String tmp = params.getString("movements");
+		
+		System.out.println("Movements: " +tmp);
+		if(!tmp.equals("")) {
+			JSONArray movements = new JSONArray(tmp);		
+			this.robot.move_mouse(movements);
+			
+			return "Movements done: " +tmp;
 		}
 		
 		return "Empty text.";
