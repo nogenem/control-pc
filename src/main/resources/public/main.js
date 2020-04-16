@@ -25,9 +25,9 @@ $(function() {
 
       return {
         id: term,
-        text: term
+        text: term,
       };
-    }
+    },
   });
 
   $('.media-controls-wrapper button:not(.dont-show)').click(function() {
@@ -160,8 +160,8 @@ $(function() {
       url: EXEC_URL,
       method: 'POST',
       data: {
-        commands
-      }
+        commands,
+      },
     });
   }
 
@@ -170,8 +170,8 @@ $(function() {
       url: TYPE_URL,
       method: 'POST',
       data: {
-        text
-      }
+        text,
+      },
     });
   }
 
@@ -180,7 +180,7 @@ $(function() {
       function(prev, curr) {
         return [prev[0] + curr[0], prev[1] + curr[1]];
       },
-      [0, 0]
+      [0, 0],
     );
 
     const sensibility = +sensibilityInput.val();
@@ -190,8 +190,8 @@ $(function() {
       url: MOVE_MOUSE_URL,
       method: 'POST',
       data: {
-        movements: JSON.stringify([mov])
-      }
+        movements: JSON.stringify([mov]),
+      },
     });
   }
 });

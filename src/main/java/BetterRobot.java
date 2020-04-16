@@ -481,6 +481,18 @@ public class BetterRobot {
     		case "_insert_":
     			doExec(KeyEvent.VK_INSERT);
     			break;
+    		case "_up_":
+    			doExec(KeyEvent.VK_UP);
+    			break;
+    		case "_down_":
+    			doExec(KeyEvent.VK_DOWN);
+    			break;
+    		case "_left_":
+    			doExec(KeyEvent.VK_LEFT);
+    			break;
+    		case "_right_":
+    			doExec(KeyEvent.VK_RIGHT);
+    			break;
     		case "_f1_":
     			doExec(KeyEvent.VK_F1);
     			break;
