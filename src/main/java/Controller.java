@@ -1,4 +1,5 @@
 import java.awt.AWTException;
+import java.awt.event.InputEvent;
 import java.util.List;
 
 import org.eclipse.jetty.util.MultiMap;
@@ -61,6 +62,90 @@ public class Controller {
 			this.robot.move_mouse(movements);
 			
 			return "Movements done: " +tmp;
+		}
+		
+		return "Empty text.";
+	}
+	
+	public String mouse_down(Request req, Response res) {
+		MultiMap<String> params = new MultiMap<String>();
+		UrlEncoded.decodeTo(req.body(), params, "UTF-8");
+		
+		String button = params.getString("button").toLowerCase();
+		
+		System.out.println("mouse_down.Button: " +button);
+		if(!button.equals("")) {
+			switch(button) {
+				case "left":
+					this.robot.mouse_down(InputEvent.BUTTON1_DOWN_MASK);
+					break;
+				case "middle":
+					this.robot.mouse_down(InputEvent.BUTTON2_DOWN_MASK);
+					break;
+				case "right":
+					this.robot.mouse_down(InputEvent.BUTTON3_DOWN_MASK);
+					break;
+				default:
+					break;
+			}
+			
+			return "Mouse pressed: " +button;
+		}
+		
+		return "Empty text.";
+	}
+	
+	public String mouse_up(Request req, Response res) {
+		MultiMap<String> params = new MultiMap<String>();
+		UrlEncoded.decodeTo(req.body(), params, "UTF-8");
+		
+		String button = params.getString("button").toLowerCase();
+		
+		System.out.println("mouse_up.Button: " +button);
+		if(!button.equals("")) {
+			switch(button) {
+				case "left":
+					this.robot.mouse_up(InputEvent.BUTTON1_DOWN_MASK);
+					break;
+				case "middle":
+					this.robot.mouse_up(InputEvent.BUTTON2_DOWN_MASK);
+					break;
+				case "right":
+					this.robot.mouse_up(InputEvent.BUTTON3_DOWN_MASK);
+					break;
+				default:
+					break;
+			}
+			
+			return "Mouse pressed: " +button;
+		}
+		
+		return "Empty text.";
+	}
+	
+	public String mouse_click(Request req, Response res) {
+		MultiMap<String> params = new MultiMap<String>();
+		UrlEncoded.decodeTo(req.body(), params, "UTF-8");
+		
+		String button = params.getString("button").toLowerCase();
+		
+		System.out.println("mouse_click.Button: " +button);
+		if(!button.equals("")) {
+			switch(button) {
+			case "left":
+				this.robot.mouse_click(InputEvent.BUTTON1_DOWN_MASK);
+				break;
+			case "middle":
+				this.robot.mouse_click(InputEvent.BUTTON2_DOWN_MASK);
+				break;
+			case "right":
+				this.robot.mouse_click(InputEvent.BUTTON3_DOWN_MASK);
+				break;
+			default:
+				break;
+			}
+			
+			return "Mouse pressed: " +button;
 		}
 		
 		return "Empty text.";

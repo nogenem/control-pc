@@ -560,7 +560,21 @@ public class BetterRobot {
     		x += pos.getInt(0);
     		y += pos.getInt(1);
     		
-	    	this.robot.mouseMove(x, y);    		
+	    	this.robot.mouseMove(x, y);   
     	}
+    }
+    
+    /* Mouse Click */
+    public void mouse_down(int button) {
+    	this.robot.mousePress(button);
+    }
+    
+    public void mouse_up(int button) {
+    	this.robot.mouseRelease(button);
+    }
+    
+    public void mouse_click(int button) {
+    	this.robot.mousePress(button);
+    	this.robot.mouseRelease(button);
     }
 }

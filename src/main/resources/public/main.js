@@ -2,6 +2,15 @@ $(function() {
   const EXEC_URL = window.location.origin + '/exec';
   const TYPE_URL = window.location.origin + '/type';
   const MOVE_MOUSE_URL = window.location.origin + '/move_mouse';
+  const MOUSE_DOWN_URL = window.location.origin + '/mouse_down';
+  const MOUSE_UP_URL = window.location.origin + '/mouse_up';
+  const MOUSE_CLICK_URL = window.location.origin + '/mouse_click';
+
+  const BUTTONS = {
+    LEFT: 'LEFT',
+    MIDDLE: 'MIDDLE',
+    RIGHT: 'RIGHT',
+  };
 
   const commandsSelect = $('#command-select');
   const commandsCheckboxes = $('.checkboxes-wrapper > p input');
@@ -12,6 +21,12 @@ $(function() {
   let lastX = null;
   let lastY = null;
   let mouseMovements = [];
+
+  const mouseBtnData = {
+    [BUTTONS.LEFT]: { timer: null, clicked: false },
+    [BUTTONS.MIDDLE]: { timer: null, clicked: false },
+    [BUTTONS.RIGHT]: { timer: null, clicked: false },
+  };
 
   commandsSelect.select2({
     width: '100%',
@@ -30,6 +45,10 @@ $(function() {
     },
   });
 
+  window.document.addEventListener('mouseup', onMouseUp);
+  window.document.addEventListener('touchend', onMouseUp);
+
+  /* Media Controls */
   $('.media-controls-wrapper button:not(.dont-show)').click(function() {
     const btn = $(this);
 
@@ -46,6 +65,7 @@ $(function() {
     }
   });
 
+  /* Command Controls */
   $('#send-commands').click(function() {
     let data = commandsSelect.select2('data');
     data = data.map(option => option.id);
@@ -67,6 +87,7 @@ $(function() {
     });
   });
 
+  /* Text Controls */
   $('#send-text').click(function() {
     const text = $.trim(textarea.val());
 
@@ -78,7 +99,7 @@ $(function() {
   });
 
   /* Mouse Area */
-  function onMouseDown(e) {
+  function onMouseDown_MouseArea(e) {
     if (e.originalEvent.type === 'mousedown') {
       lastX = event.clientX;
       lastY = event.clientY;
@@ -96,7 +117,7 @@ $(function() {
     }
   }
 
-  function onMouseUp() {
+  function onMouseUp_MouseArea() {
     if (mouseMovements.length > 0) {
       sendMoveMouse([...mouseMovements]);
       mouseMovements = [];
@@ -106,7 +127,7 @@ $(function() {
     lastY = null;
   }
 
-  function onMouseMove(e) {
+  function onMouseMove_MouseArea(e) {
     if (lastX === null || lastY === null) return true;
 
     const touches = e.originalEvent.touches;
@@ -137,8 +158,6 @@ $(function() {
       lastY = touches[0].pageY;
     }
 
-    console.log('mov', movement);
-
     if (e.originalEvent.type === 'touchmove') {
       e.preventDefault();
       e.stopPropagation();
@@ -147,13 +166,77 @@ $(function() {
     }
   }
 
-  mouseArea.mousedown(onMouseDown);
-  mouseArea.mouseup(onMouseUp);
-  mouseArea.mousemove(onMouseMove);
+  mouseArea.mousedown(onMouseDown_MouseArea);
+  mouseArea.mousemove(onMouseMove_MouseArea);
 
-  mouseArea.on('touchstart', onMouseDown);
-  mouseArea.on('touchend', onMouseUp);
-  mouseArea.on('touchmove', onMouseMove);
+  mouseArea.on('touchstart', onMouseDown_MouseArea);
+  mouseArea.on('touchmove', onMouseMove_MouseArea);
+
+  function onMouseDown_MouseButtons(e, button) {
+    mouseBtnData[button].timer = setTimeout(() => {
+      sendMouseDown(button);
+      mouseBtnData[button].timer = null;
+    }, 250);
+    mouseBtnData[button].clicked = true;
+  }
+
+  function onMouseUp_MouseButtons(e, button) {
+    if (mouseBtnData[button].timer !== null) {
+      clearTimeout(mouseBtnData[button].timer);
+      sendMouseClick(button);
+    } else {
+      sendMouseUp(button);
+    }
+
+    mouseBtnData[button].clicked = false;
+  }
+
+  $('#left-mouse').mousedown(function(e) {
+    onMouseDown_MouseButtons(e, BUTTONS.LEFT);
+  });
+  $('#left-mouse').on('touchstart', function(e) {
+    onMouseDown_MouseButtons(e, BUTTONS.LEFT);
+  });
+
+  $('#middle-mouse').mousedown(function(e) {
+    onMouseDown_MouseButtons(e, BUTTONS.MIDDLE);
+  });
+  $('#middle-mouse').on('touchstart', function(e) {
+    onMouseDown_MouseButtons(e, BUTTONS.MIDDLE);
+  });
+
+  $('#right-mouse').mousedown(function(e) {
+    onMouseDown_MouseButtons(e, BUTTONS.RIGHT);
+  });
+  $('#right-mouse').on('touchstart', function(e) {
+    onMouseDown_MouseButtons(e, BUTTONS.RIGHT);
+  });
+
+  function onMouseUp(e) {
+    const evtType = !!e.originalEvent ? e.originalEvent.type : e.type;
+
+    if (!!lastX && !!lastY) {
+      onMouseUp_MouseArea(e);
+    }
+
+    const id = e.target.id;
+    if (id === 'left-mouse' && mouseBtnData[BUTTONS.LEFT].clicked) {
+      onMouseUp_MouseButtons(e, BUTTONS.LEFT);
+    } else if (id === 'middle-mouse' && mouseBtnData[BUTTONS.MIDDLE].clicked) {
+      onMouseUp_MouseButtons(e, BUTTONS.MIDDLE);
+    } else if (id === 'right-mouse' && mouseBtnData[BUTTONS.RIGHT].clicked) {
+      onMouseUp_MouseButtons(e, BUTTONS.RIGHT);
+    }
+
+    if (evtType === 'touchend') {
+      e.preventDefault();
+      e.stopPropagation();
+
+      return false;
+    }
+
+    return true;
+  }
 
   function sendCommands(commands) {
     $.ajax({
@@ -191,6 +274,42 @@ $(function() {
       method: 'POST',
       data: {
         movements: JSON.stringify([mov]),
+      },
+    });
+  }
+
+  function sendMouseDown(button) {
+    if (!BUTTONS[button]) return;
+
+    $.ajax({
+      url: MOUSE_DOWN_URL,
+      method: 'POST',
+      data: {
+        button,
+      },
+    });
+  }
+
+  function sendMouseUp(button) {
+    if (!BUTTONS[button]) return;
+
+    $.ajax({
+      url: MOUSE_UP_URL,
+      method: 'POST',
+      data: {
+        button,
+      },
+    });
+  }
+
+  function sendMouseClick(button) {
+    if (!BUTTONS[button]) return;
+
+    $.ajax({
+      url: MOUSE_CLICK_URL,
+      method: 'POST',
+      data: {
+        button,
       },
     });
   }

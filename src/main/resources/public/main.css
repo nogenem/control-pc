@@ -87,6 +87,17 @@
     border-right: 2px solid black;
 }
 
+.mouse-btns-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.mouse-btns-wrapper > button {
+    margin-bottom: 10px;
+}
+
 /* Arrumar bug entre materialize e select2 */
 .select2-search.select2-search--inline > input.select2-search__field {
     height: inherit !important;

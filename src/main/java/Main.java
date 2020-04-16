@@ -58,6 +58,9 @@ public class Main {
 		Spark.post("/exec", (req, res) -> controller.exec(req, res));
 		Spark.post("/type", (req, res) -> controller.type(req, res));
 		Spark.post("/move_mouse", (req, res) -> controller.move_mouse(req, res));
+		Spark.post("/mouse_down", (req, res) -> controller.mouse_down(req, res));
+		Spark.post("/mouse_up", (req, res) -> controller.mouse_up(req, res));
+		Spark.post("/mouse_click", (req, res) -> controller.mouse_click(req, res));
 	}
 
 	private static void registerShutdownThread() {
