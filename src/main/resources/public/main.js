@@ -6,10 +6,12 @@ $(function() {
   const MOUSE_UP_URL = window.location.origin + '/mouse_up';
   const MOUSE_CLICK_URL = window.location.origin + '/mouse_click';
 
-  const BUTTONS = {
+  const MOUSE_BUTTONS = {
     LEFT: 'LEFT',
     MIDDLE: 'MIDDLE',
     RIGHT: 'RIGHT',
+    SCROLL_UP: 'SCROLL_UP',
+    SCROLL_DOWN: 'SCROLL_DOWN',
   };
 
   const commandsSelect = $('#command-select');
@@ -23,9 +25,11 @@ $(function() {
   let mouseMovements = [];
 
   const mouseBtnData = {
-    [BUTTONS.LEFT]: { timer: null, clicked: false },
-    [BUTTONS.MIDDLE]: { timer: null, clicked: false },
-    [BUTTONS.RIGHT]: { timer: null, clicked: false },
+    [MOUSE_BUTTONS.LEFT]: { timer: null, clicked: false },
+    [MOUSE_BUTTONS.MIDDLE]: { timer: null, clicked: false },
+    [MOUSE_BUTTONS.RIGHT]: { timer: null, clicked: false },
+    [MOUSE_BUTTONS.SCROLL_UP]: { timer: null, clicked: false },
+    [MOUSE_BUTTONS.SCROLL_DOWN]: { timer: null, clicked: false },
   };
 
   commandsSelect.select2({
@@ -49,7 +53,7 @@ $(function() {
   window.document.addEventListener('touchend', onMouseUp);
 
   /* Media Controls */
-  $('.media-controls-wrapper button:not(.dont-show)').click(function() {
+  $('.media-controls-wrapper button:not(.dont-show)').click(function(e) {
     const btn = $(this);
 
     try {
@@ -173,17 +177,35 @@ $(function() {
   mouseArea.on('touchmove', onMouseMove_MouseArea);
 
   function onMouseDown_MouseButtons(e, button) {
-    mouseBtnData[button].timer = setTimeout(() => {
-      sendMouseDown(button);
+    if (!!mouseBtnData[button].timer) {
+      clearTimeout(mouseBtnData[button].timer);
       mouseBtnData[button].timer = null;
-    }, 250);
+    }
+
+    if (isScrollBtn(button)) {
+      const delay = +$('#scroll-delay-input').val();
+      mouseBtnData[button].timer = setInterval(() => {
+        sendMouseClick(button);
+      }, delay);
+    } else {
+      mouseBtnData[button].timer = setTimeout(() => {
+        sendMouseDown(button);
+        mouseBtnData[button].timer = null;
+      }, 250);
+    }
     mouseBtnData[button].clicked = true;
   }
 
   function onMouseUp_MouseButtons(e, button) {
     if (mouseBtnData[button].timer !== null) {
-      clearTimeout(mouseBtnData[button].timer);
-      sendMouseClick(button);
+      if (isScrollBtn(button)) {
+        clearInterval(mouseBtnData[button].timer);
+        mouseBtnData[button].timer = null;
+      } else {
+        clearTimeout(mouseBtnData[button].timer);
+        mouseBtnData[button].timer = null;
+        sendMouseClick(button);
+      }
     } else {
       sendMouseUp(button);
     }
@@ -191,47 +213,84 @@ $(function() {
     mouseBtnData[button].clicked = false;
   }
 
-  $('#left-mouse').mousedown(function(e) {
-    onMouseDown_MouseButtons(e, BUTTONS.LEFT);
-  });
-  $('#left-mouse').on('touchstart', function(e) {
-    onMouseDown_MouseButtons(e, BUTTONS.LEFT);
+  $('#left-mouse').on('mousedown touchstart', function(e) {
+    if (e.handled) return false;
+    e.handled = true;
+
+    onMouseDown_MouseButtons(e, MOUSE_BUTTONS.LEFT);
   });
 
-  $('#middle-mouse').mousedown(function(e) {
-    onMouseDown_MouseButtons(e, BUTTONS.MIDDLE);
-  });
-  $('#middle-mouse').on('touchstart', function(e) {
-    onMouseDown_MouseButtons(e, BUTTONS.MIDDLE);
+  $('#middle-mouse').on('mousedown touchstart', function(e) {
+    if (e.handled) return false;
+    e.handled = true;
+
+    onMouseDown_MouseButtons(e, MOUSE_BUTTONS.MIDDLE);
   });
 
-  $('#right-mouse').mousedown(function(e) {
-    onMouseDown_MouseButtons(e, BUTTONS.RIGHT);
+  $('#right-mouse').on('mousedown touchstart', function(e) {
+    if (e.handled) return false;
+    e.handled = true;
+
+    onMouseDown_MouseButtons(e, MOUSE_BUTTONS.RIGHT);
   });
-  $('#right-mouse').on('touchstart', function(e) {
-    onMouseDown_MouseButtons(e, BUTTONS.RIGHT);
+
+  $('#scroll-up').on('mousedown touchstart', function(e) {
+    if (e.handled) return false;
+    e.handled = true;
+
+    onMouseDown_MouseButtons(e, MOUSE_BUTTONS.SCROLL_UP);
+  });
+
+  $('#scroll-down').on('mousedown touchstart', function(e) {
+    if (e.handled) return false;
+    e.handled = true;
+
+    onMouseDown_MouseButtons(e, MOUSE_BUTTONS.SCROLL_DOWN);
   });
 
   function onMouseUp(e) {
-    const evtType = !!e.originalEvent ? e.originalEvent.type : e.type;
+    if (e.handled) return false;
+    e.handled = true;
 
     if (!!lastX && !!lastY) {
       onMouseUp_MouseArea(e);
     }
 
     const id = e.target.id;
-    if (id === 'left-mouse' && mouseBtnData[BUTTONS.LEFT].clicked) {
-      onMouseUp_MouseButtons(e, BUTTONS.LEFT);
-    } else if (id === 'middle-mouse' && mouseBtnData[BUTTONS.MIDDLE].clicked) {
-      onMouseUp_MouseButtons(e, BUTTONS.MIDDLE);
-    } else if (id === 'right-mouse' && mouseBtnData[BUTTONS.RIGHT].clicked) {
-      onMouseUp_MouseButtons(e, BUTTONS.RIGHT);
+    let hasBtnClicked = false;
+    if (id === 'left-mouse' && mouseBtnData[MOUSE_BUTTONS.LEFT].clicked) {
+      onMouseUp_MouseButtons(e, MOUSE_BUTTONS.LEFT);
+      hasBtnClicked = true;
+    } else if (
+      id === 'middle-mouse' &&
+      mouseBtnData[MOUSE_BUTTONS.MIDDLE].clicked
+    ) {
+      onMouseUp_MouseButtons(e, MOUSE_BUTTONS.MIDDLE);
+      hasBtnClicked = true;
+    } else if (
+      id === 'right-mouse' &&
+      mouseBtnData[MOUSE_BUTTONS.RIGHT].clicked
+    ) {
+      onMouseUp_MouseButtons(e, MOUSE_BUTTONS.RIGHT);
+      hasBtnClicked = true;
+    } else if (
+      id === 'scroll-up' &&
+      mouseBtnData[MOUSE_BUTTONS.SCROLL_UP].clicked
+    ) {
+      onMouseUp_MouseButtons(e, MOUSE_BUTTONS.SCROLL_UP);
+      hasBtnClicked = true;
+    } else if (
+      id === 'scroll-down' &&
+      mouseBtnData[MOUSE_BUTTONS.SCROLL_DOWN].clicked
+    ) {
+      onMouseUp_MouseButtons(e, MOUSE_BUTTONS.SCROLL_DOWN);
+      hasBtnClicked = true;
     }
 
-    if (evtType === 'touchend') {
+    const evtType = !!e.originalEvent ? e.originalEvent.type : e.type;
+    if (hasBtnClicked && evtType === 'touchend') {
       e.preventDefault();
       e.stopPropagation();
-
       return false;
     }
 
@@ -279,19 +338,20 @@ $(function() {
   }
 
   function sendMouseDown(button) {
-    if (!BUTTONS[button]) return;
+    if (!MOUSE_BUTTONS[button]) return;
 
     $.ajax({
       url: MOUSE_DOWN_URL,
       method: 'POST',
       data: {
         button,
+        sensibility,
       },
     });
   }
 
   function sendMouseUp(button) {
-    if (!BUTTONS[button]) return;
+    if (!MOUSE_BUTTONS[button]) return;
 
     $.ajax({
       url: MOUSE_UP_URL,
@@ -303,14 +363,25 @@ $(function() {
   }
 
   function sendMouseClick(button) {
-    if (!BUTTONS[button]) return;
+    if (!MOUSE_BUTTONS[button]) return;
+
+    let sensibility = undefined;
+    if (isScrollBtn(button))
+      sensibility = +$('#scroll-sensibility-input').val();
 
     $.ajax({
       url: MOUSE_CLICK_URL,
       method: 'POST',
       data: {
         button,
+        sensibility,
       },
     });
+  }
+
+  function isScrollBtn(button) {
+    return (
+      button === MOUSE_BUTTONS.SCROLL_UP || button === MOUSE_BUTTONS.SCROLL_DOWN
+    );
   }
 });

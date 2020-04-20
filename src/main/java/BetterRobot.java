@@ -577,4 +577,12 @@ public class BetterRobot {
     	this.robot.mousePress(button);
     	this.robot.mouseRelease(button);
     }
+
+	public void scroll_up(int sensibility) {
+		this.robot.mouseWheel(-5*sensibility);
+	}
+	
+	public void scroll_down(int sensibility) {
+		this.robot.mouseWheel(5*sensibility);
+	}
 }

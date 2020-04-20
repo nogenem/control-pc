@@ -128,8 +128,13 @@ public class Controller {
 		UrlEncoded.decodeTo(req.body(), params, "UTF-8");
 		
 		String button = params.getString("button").toLowerCase();
+		int sensibility = 1;
 		
-		System.out.println("mouse_click.Button: " +button);
+		try {
+			sensibility = Integer.parseInt(params.getString("sensibility"));			
+		} catch(NumberFormatException ex) {}
+		
+		System.out.println("mouse_click.Button: " +button+ ". Sensibility: " +sensibility);
 		if(!button.equals("")) {
 			switch(button) {
 			case "left":
@@ -140,6 +145,12 @@ public class Controller {
 				break;
 			case "right":
 				this.robot.mouse_click(InputEvent.BUTTON3_DOWN_MASK);
+				break;
+			case "scroll_up":
+				this.robot.scroll_up(sensibility);
+				break;
+			case "scroll_down":
+				this.robot.scroll_down(sensibility);
 				break;
 			default:
 				break;
