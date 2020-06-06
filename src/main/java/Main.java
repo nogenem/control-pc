@@ -37,7 +37,7 @@ public class Main {
 		    String staticDir = "/src/main/resources/public";
 		    Spark.staticFiles.externalLocation(projectDir + staticDir);
 		} else {
-			Spark.staticFiles.location("/public");
+			Spark.staticFiles.location("/resources/public");
 		}
 		
 		Spark.exception(Exception.class, (e, req, res) -> {
@@ -74,7 +74,7 @@ public class Main {
 	
 	private static boolean isInsideJar() {
 		URL path = Main.class.getResource("Main.class");
-		return path != null ? path.toString().startsWith("jar:") : false;
+		return path.toString().startsWith("jar:");
 	}
 	
 	private static String getIpAdress() {
