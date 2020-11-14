@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>nogenem.com.github</groupId>
 	<artifactId>control-pc</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<name>Control PC</name>
 	
 	<dependencies>
