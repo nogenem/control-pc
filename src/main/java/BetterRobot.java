@@ -13,11 +13,12 @@ public class BetterRobot {
     private Robot robot;
 
     public BetterRobot() throws AWTException {
-        this.robot = new Robot();
+        this(new Robot());
     }
 
     public BetterRobot(Robot robot) {
         this.robot = robot;
+        this.robot.setAutoDelay(10);
     }
     
 //    public static void main(String[] args) throws Exception {
@@ -544,7 +545,7 @@ public class BetterRobot {
         }
 
         robot.keyPress(keyCodes[offset]);
-        doType(keyCodes, offset + 1, length - 1);
+        doExec(keyCodes, offset + 1, length - 1);
         robot.keyRelease(keyCodes[offset]);
     }
     
