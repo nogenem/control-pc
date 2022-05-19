@@ -1,60 +1,100 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <!-- <link href="//cdn.muicss.com/mui-0.10.1/css/mui.min.css" rel="stylesheet" type="text/css" /> -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
-    <link href="main.css" rel="stylesheet" type="text/css">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css"
+      rel="stylesheet"
+    />
+    <link href="main.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
     <div class="row">
       <div class="col s12 m8 offset-m2 l6 offset-l3">
         <div class="card">
           <div class="card-content">
-
             <h5 class="headline">Media Controls</h5>
 
             <div class="media-controls-wrapper">
               <div>
                 <button class="waves-effect waves-light btn dont-show"></button>
-                <button class="waves-effect waves-light btn" title="Volume up" data-commands='["_volume_up_"]'>
+                <button
+                  class="waves-effect waves-light btn"
+                  title="Volume up"
+                  data-commands='["_volume_up_"]'
+                >
                   <i class="material-icons">volume_up</i>
                 </button>
                 <button class="waves-effect waves-light btn dont-show"></button>
               </div>
               <div>
-                <button class="waves-effect waves-light btn" title="Skip previous" data-commands='["_skip_previous_"]'>
+                <button
+                  class="waves-effect waves-light btn"
+                  title="Skip previous"
+                  data-commands='["_skip_previous_"]'
+                >
                   <i class="material-icons">skip_previous</i>
                 </button>
-                <button class="waves-effect waves-light btn" title="Play/Pause" data-commands='["_play_pause_"]'>
+                <button
+                  class="waves-effect waves-light btn"
+                  title="Play/Pause"
+                  data-commands='["_play_pause_"]'
+                >
                   <i class="material-icons">play_arrow</i>
                 </button>
-                <button class="waves-effect waves-light btn" title="Skip next" data-commands='["_skip_next_"]'>
+                <button
+                  class="waves-effect waves-light btn"
+                  title="Skip next"
+                  data-commands='["_skip_next_"]'
+                >
                   <i class="material-icons">skip_next</i>
                 </button>
               </div>
               <div>
-                <button class="waves-effect waves-light btn" title="Mute/Unmute" data-commands='["_mute_"]'>
+                <button
+                  class="waves-effect waves-light btn"
+                  title="Mute/Unmute"
+                  data-commands='["_mute_"]'
+                >
                   <i class="material-icons">volume_off</i>
                 </button>
-                <button class="waves-effect waves-light btn" title="Volume down" data-commands='["_volume_down_"]'>
+                <button
+                  class="waves-effect waves-light btn"
+                  title="Volume down"
+                  data-commands='["_volume_down_"]'
+                >
                   <i class="material-icons">volume_down</i>
                 </button>
                 <button class="waves-effect waves-light btn dont-show"></button>
               </div>
-            </div> <!-- Media Controls -->
+            </div>
+            <!-- Media Controls -->
 
             <h5 class="headline margintop">Commands</h5>
 
             <div class="row">
               <div class="input-field small-margintop col s12 m6 offset-m3">
-                <select name="command-select" id="command-select" multiple="multiple">
+                <select
+                  name="command-select"
+                  id="command-select"
+                  multiple="multiple"
+                >
                   <option value="_esc_">Escape</option>
                   <option value="_tab_">Tab</option>
                   <option value="_capslock_">Capslock</option>
@@ -90,31 +130,31 @@
               <div class="col s12 m6 offset-m3 checkboxes-wrapper">
                 <p>
                   <label>
-                    <input type="checkbox" data-command='_shift_' />
+                    <input type="checkbox" data-command="_shift_" />
                     <span>Shift</span>
                   </label>
                 </p>
                 <p>
                   <label>
-                    <input type="checkbox" data-command='_ctrl_' />
+                    <input type="checkbox" data-command="_ctrl_" />
                     <span>Ctrl</span>
                   </label>
                 </p>
                 <p>
                   <label>
-                    <input type="checkbox" data-command='_win_' />
+                    <input type="checkbox" data-command="_win_" />
                     <span>Win</span>
                   </label>
                 </p>
                 <p>
                   <label>
-                    <input type="checkbox" data-command='_alt_' />
+                    <input type="checkbox" data-command="_alt_" />
                     <span>Alt</span>
                   </label>
                 </p>
                 <p>
                   <label>
-                    <input type="checkbox" data-command='_alt_gr_' />
+                    <input type="checkbox" data-command="_alt_gr_" />
                     <span>Alt GR</span>
                   </label>
                 </p>
@@ -123,17 +163,24 @@
                 <button class="waves-effect waves-light btn" id="send-commands">
                   Send
                 </button>
-                <button class="waves-effect waves-light btn" id="clear-commands">
+                <button
+                  class="waves-effect waves-light btn"
+                  id="clear-commands"
+                >
                   Clear
                 </button>
               </div>
-            </div> <!-- Commands Controls -->
-            
+            </div>
+            <!-- Commands Controls -->
+
             <h5 class="headline margintop">Text</h5>
 
             <div class="row">
               <div class="input-field small-margintop col s12 m6 offset-m3">
-                <textarea id="text-command" class="materialize-textarea"></textarea>
+                <textarea
+                  id="text-command"
+                  class="materialize-textarea"
+                ></textarea>
                 <label for="text-command">Type text</label>
               </div>
               <div class="input-field col s12 m8 offset-m2">
@@ -144,7 +191,8 @@
                   Clear
                 </button>
               </div>
-            </div> <!-- Text Controls -->
+            </div>
+            <!-- Text Controls -->
 
             <h5 class="headline margintop">Mouse</h5>
             <p class="mouse-area-p">Control your mouse using the area below</p>
@@ -153,24 +201,40 @@
               <div class="col s12 m10 offset-m1 l8 offset-l2 mouse-area">
                 <span />
               </div>
-              <div class="input-field col s12 m6 offset-m3" style="margin-top: 1.5rem;">
-                <input id="sensibility-input" type="number" min="1" step="0.5" value="3" class="validate">
-                <label for="sensibility-input">Mouse Move Sensibility (1, 1.5, 2, ...)</label>
+              <div
+                class="input-field col s12 m6 offset-m3"
+                style="margin-top: 1.5rem"
+              >
+                <input
+                  id="sensibility-input"
+                  type="number"
+                  min="1"
+                  step="0.5"
+                  value="3"
+                  class="validate"
+                />
+                <label for="sensibility-input">
+                  Mouse Move Sensibility (1, 1.5, 2, ...)
+                </label>
               </div>
               <div class="col s12 m10 offset-m1 l8 offset-l2">
                 <div class="mouse-btns-wrapper">
                   <button class="waves-effect waves-light btn" id="left-mouse">
                     Left Mouse
                   </button>
-                  <button class="waves-effect waves-light btn" id="middle-mouse">
-                     Middle Mouse
+                  <button
+                    class="waves-effect waves-light btn"
+                    id="middle-mouse"
+                  >
+                    Middle Mouse
                   </button>
                   <button class="waves-effect waves-light btn" id="right-mouse">
                     Right Mouse
                   </button>
                 </div>
               </div>
-            </div> <!-- Mouse Controls -->
+            </div>
+            <!-- Mouse Controls -->
 
             <h5 class="headline margintop">Mouse Scroll</h5>
 
@@ -185,18 +249,41 @@
                   </button>
                 </div>
               </div>
-              <div class="input-field col s12 m6 offset-m3" style="margin-top: 1.5rem;">
-                <input id="scroll-sensibility-input" type="number" min="0.5" step="0.5" value="1" class="validate">
-                <label for="scroll-sensibility-input">Scroll Sensibility (1, 1.5, 2, ...)</label>
+              <div
+                class="input-field col s12 m6 offset-m3"
+                style="margin-top: 1.5rem"
+              >
+                <input
+                  id="scroll-sensibility-input"
+                  type="number"
+                  min="0.5"
+                  step="0.5"
+                  value="1"
+                  class="validate"
+                />
+                <label for="scroll-sensibility-input">
+                  Scroll Sensibility (1, 1.5, 2, ...)
+                </label>
               </div>
-              <div class="input-field col s12 m6 offset-m3" style="margin-top: 1.5rem;">
-                <input id="scroll-delay-input" type="number" min="100" step="50" value="150" class="validate">
+              <div
+                class="input-field col s12 m6 offset-m3"
+                style="margin-top: 1.5rem"
+              >
+                <input
+                  id="scroll-delay-input"
+                  type="number"
+                  min="100"
+                  step="50"
+                  value="150"
+                  class="validate"
+                />
                 <label for="scroll-delay-input">Scroll Delay (ms)</label>
               </div>
-            </div> <!-- Mouse Scroll Controls -->
-
+            </div>
+            <!-- Mouse Scroll Controls -->
           </div>
-        </div> <!-- Card -->
+        </div>
+        <!-- Card -->
       </div>
     </div>
 
