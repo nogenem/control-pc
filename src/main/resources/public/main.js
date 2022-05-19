@@ -1,4 +1,4 @@
-$(function() {
+$(function () {
   const EXEC_URL = window.location.origin + '/exec';
   const TYPE_URL = window.location.origin + '/type';
   const MOVE_MOUSE_URL = window.location.origin + '/move_mouse';
@@ -35,7 +35,7 @@ $(function() {
   commandsSelect.select2({
     width: '100%',
     tags: true,
-    createTag: function(params) {
+    createTag: function (params) {
       var term = $.trim(params.term);
 
       if (term === '') {
@@ -53,7 +53,7 @@ $(function() {
   window.document.addEventListener('touchend', onMouseUp);
 
   /* Media Controls */
-  $('.media-controls-wrapper button:not(.dont-show)').click(function(e) {
+  $('.media-controls-wrapper button:not(.dont-show)').click(function (e) {
     const btn = $(this);
 
     try {
@@ -70,12 +70,12 @@ $(function() {
   });
 
   /* Command Controls */
-  $('#send-commands').click(function() {
+  $('#send-commands').click(function () {
     let data = commandsSelect.select2('data');
     data = data.map(option => option.id);
 
     const modifierKeys = [];
-    commandsCheckboxes.each(function() {
+    commandsCheckboxes.each(function () {
       const checkbox = $(this);
       if (checkbox.is(':checked')) modifierKeys.push(checkbox.data('command'));
     });
@@ -83,37 +83,38 @@ $(function() {
     sendCommands([...modifierKeys, ...data]);
   });
 
-  $('#clear-commands').click(function() {
+  $('#clear-commands').click(function () {
     commandsSelect.val(null).trigger('change');
-    commandsCheckboxes.each(function() {
+    commandsCheckboxes.each(function () {
       const checkbox = $(this);
       if (checkbox.is(':checked')) checkbox.parent().click();
     });
   });
 
   /* Text Controls */
-  $('#send-text').click(function() {
+  $('#send-text').click(function () {
     const text = $.trim(textarea.val());
 
     sendText(text);
   });
 
-  $('#clear-text').click(function() {
+  $('#clear-text').click(function () {
     textarea.val('');
   });
 
   /* Mouse Area */
   function onMouseDown_MouseArea(e) {
-    if (e.originalEvent.type === 'mousedown') {
+    const event = e.originalEvent;
+    if (event.type === 'mousedown') {
       lastX = event.clientX;
       lastY = event.clientY;
-    } else if (e.originalEvent.type === 'touchstart') {
-      const touches = e.originalEvent.touches;
+    } else if (event.type === 'touchstart') {
+      const touches = event.touches;
       lastX = touches[0].pageX;
       lastY = touches[0].pageY;
     }
 
-    if (e.originalEvent.type === 'touchstart') {
+    if (event.type === 'touchstart') {
       e.preventDefault();
       e.stopPropagation();
 
@@ -134,13 +135,14 @@ $(function() {
   function onMouseMove_MouseArea(e) {
     if (lastX === null || lastY === null) return true;
 
-    const touches = e.originalEvent.touches;
+    const event = e.originalEvent;
+    const touches = event.touches;
     let movement;
 
-    if (e.originalEvent.type === 'mousemove')
+    if (event.type === 'mousemove')
       // movement = [lastX - event.clientX, lastY - event.clientY];
       movement = [event.clientX - lastX, event.clientY - lastY];
-    else if (e.originalEvent.type === 'touchmove') {
+    else if (event.type === 'touchmove') {
       // movement = [lastX - touches[0].pageX, lastY - touches[0].pageY];
       movement = [touches[0].pageX - lastX, touches[0].pageY - lastY];
     }
@@ -154,15 +156,15 @@ $(function() {
       mouseMovements = [];
     }
 
-    if (e.originalEvent.type === 'mousemove') {
+    if (event.type === 'mousemove') {
       lastX = event.clientX;
       lastY = event.clientY;
-    } else if (e.originalEvent.type === 'touchmove') {
+    } else if (event.type === 'touchmove') {
       lastX = touches[0].pageX;
       lastY = touches[0].pageY;
     }
 
-    if (e.originalEvent.type === 'touchmove') {
+    if (event.type === 'touchmove') {
       e.preventDefault();
       e.stopPropagation();
 
@@ -213,35 +215,35 @@ $(function() {
     mouseBtnData[button].clicked = false;
   }
 
-  $('#left-mouse').on('mousedown touchstart', function(e) {
+  $('#left-mouse').on('mousedown touchstart', function (e) {
     if (e.handled) return false;
     e.handled = true;
 
     onMouseDown_MouseButtons(e, MOUSE_BUTTONS.LEFT);
   });
 
-  $('#middle-mouse').on('mousedown touchstart', function(e) {
+  $('#middle-mouse').on('mousedown touchstart', function (e) {
     if (e.handled) return false;
     e.handled = true;
 
     onMouseDown_MouseButtons(e, MOUSE_BUTTONS.MIDDLE);
   });
 
-  $('#right-mouse').on('mousedown touchstart', function(e) {
+  $('#right-mouse').on('mousedown touchstart', function (e) {
     if (e.handled) return false;
     e.handled = true;
 
     onMouseDown_MouseButtons(e, MOUSE_BUTTONS.RIGHT);
   });
 
-  $('#scroll-up').on('mousedown touchstart', function(e) {
+  $('#scroll-up').on('mousedown touchstart', function (e) {
     if (e.handled) return false;
     e.handled = true;
 
     onMouseDown_MouseButtons(e, MOUSE_BUTTONS.SCROLL_UP);
   });
 
-  $('#scroll-down').on('mousedown touchstart', function(e) {
+  $('#scroll-down').on('mousedown touchstart', function (e) {
     if (e.handled) return false;
     e.handled = true;
 
@@ -319,7 +321,7 @@ $(function() {
 
   function sendMoveMouse(movements) {
     let mov = movements.reduce(
-      function(prev, curr) {
+      function (prev, curr) {
         return [prev[0] + curr[0], prev[1] + curr[1]];
       },
       [0, 0],
