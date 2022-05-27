@@ -137,4 +137,8 @@ public class KeyboardLayoutManager {
     public Map<String, Map<String, int[][]>> getKeyboardLayoutsMap() {
         return this.keyboardLayoutsMap;
     }
+
+    public boolean hasLayout(String layout) {
+        return this.keyboardLayoutsMap.containsKey(layout);
+    }
 }

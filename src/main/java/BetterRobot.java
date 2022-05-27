@@ -56,15 +56,15 @@ public class BetterRobot {
     }
 
     /* Exec */
-    public void exec(String... commands) {
+    public void exec(String layout, String... commands) {
         for (int i = 0; i < commands.length; i++) {
             String command = commands[i];
 
             if (this.isModifierKey(command))
-                this.press_key(command);
+                this.press_key(layout, command);
             else {
                 try {
-                    this.exec(command);
+                    this.exec(layout, command);
                 } catch (IllegalArgumentException e) {
                     System.err.println(e.getMessage());
                 }
@@ -75,12 +75,12 @@ public class BetterRobot {
             String command = commands[i];
 
             if (this.isModifierKey(command))
-                this.release_key(command);
+                this.release_key(layout, command);
         }
     }
 
-    private void exec(String cmd) {
-        int[][] keyCodes = this.keyboardLayoutManager.getKeyCodes(cmd);
+    private void exec(String layout, String cmd) {
+        int[][] keyCodes = this.keyboardLayoutManager.getKeyCodes(layout, cmd);
         if (keyCodes != null) {
             boolean didExecute = false;
             int index = 0;
@@ -129,8 +129,8 @@ public class BetterRobot {
     }
 
     /* Press Key */
-    public void press_key(String key) {
-        int[][] keyCodes = this.keyboardLayoutManager.getKeyCodes(key);
+    public void press_key(String layout, String key) {
+        int[][] keyCodes = this.keyboardLayoutManager.getKeyCodes(layout, key);
         if (keyCodes != null) {
             boolean didExecute = false;
             int index = 0;
@@ -174,8 +174,8 @@ public class BetterRobot {
     }
 
     /* Release Key */
-    public void release_key(String key) {
-        int[][] keyCodes = this.keyboardLayoutManager.getKeyCodes(key);
+    public void release_key(String layout, String key) {
+        int[][] keyCodes = this.keyboardLayoutManager.getKeyCodes(layout, key);
         if (keyCodes != null) {
 
             boolean didExecute = false;

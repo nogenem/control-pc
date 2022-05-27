@@ -22,17 +22,22 @@ public class Controller {
 		UrlEncoded.decodeTo(req.body(), params, "UTF-8");
 
 		List<String> cmds = params.get("commands[]");
+		String layout = params.getString("layout");
 
-		if (cmds != null && cmds.size() > 0) {
-			System.out.println("Cmds: " + cmds);
-
-			String[] commands = cmds.toArray(new String[0]);
-			this.robot.exec(commands);
-
-			return "Commands executed: " + cmds;
+		if (cmds == null || cmds.size() == 0) {
+			res.status(400);
+			return "Empty commands.";
+		} else if (layout == null || !this.robot.getKeyboardLayoutManager().hasLayout(layout)) {
+			res.status(400);
+			return "Invalid layout.";
 		}
 
-		return "Empty command.";
+		System.out.println("Cmds: " + cmds);
+
+		String[] commands = cmds.toArray(new String[0]);
+		this.robot.exec(layout, commands);
+
+		return "Commands executed: " + cmds;
 	}
 
 	public String type(Request req, Response res) {
@@ -57,16 +62,21 @@ public class Controller {
 		UrlEncoded.decodeTo(req.body(), params, "UTF-8");
 
 		String key = params.getString("key");
+		String layout = params.getString("layout");
 
-		if (key != null && !key.equals("")) {
-			System.out.println("press_key.Key: " + key);
-
-			this.robot.press_key(key);
-
-			return "Key pressed: " + key;
+		if (key == null || key.isEmpty()) {
+			res.status(400);
+			return "Empty key.";
+		} else if (layout == null || !this.robot.getKeyboardLayoutManager().hasLayout(layout)) {
+			res.status(400);
+			return "Invalid layout.";
 		}
 
-		return "Empty key.";
+		System.out.println("press_key.Key: " + key);
+
+		this.robot.press_key(layout, key);
+
+		return "Key pressed: " + key;
 	}
 
 	public String release_key(Request req, Response res) {
@@ -74,16 +84,21 @@ public class Controller {
 		UrlEncoded.decodeTo(req.body(), params, "UTF-8");
 
 		String key = params.getString("key");
+		String layout = params.getString("layout");
 
-		if (key != null && !key.equals("")) {
-			System.out.println("release_key.Key: " + key);
-
-			this.robot.release_key(key);
-
-			return "Key released: " + key;
+		if (key == null || key.isEmpty()) {
+			res.status(400);
+			return "Empty key.";
+		} else if (layout == null || !this.robot.getKeyboardLayoutManager().hasLayout(layout)) {
+			res.status(400);
+			return "Invalid layout.";
 		}
 
-		return "Empty key.";
+		System.out.println("release_key.Key: " + key);
+
+		this.robot.release_key(layout, key);
+
+		return "Key released: " + key;
 	}
 
 	public String move_mouse(Request req, Response res) {
