@@ -134,9 +134,9 @@ public class Controller {
 		MultiMap<String> params = new MultiMap<String>();
 		UrlEncoded.decodeTo(req.body(), params, "UTF-8");
 
-		int sensibility = 1;
+		float sensibility = 1.0f;
 		try {
-			sensibility = Integer.parseInt(params.getString("sensibility"));
+			sensibility = Float.parseFloat(params.getString("sensibility"));
 		} catch (NumberFormatException ex) {
 		}
 
