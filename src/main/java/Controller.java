@@ -46,15 +46,16 @@ public class Controller {
 
 		String text = params.getString("text");
 
-		if (text != null && !text.equals("")) {
-			System.out.println("Text: " + text);
-
-			this.robot.type(text);
-
-			return "Text typed: " + text;
+		if (text == null || text.isEmpty()) {
+			res.status(400);
+			return "Empty text.";
 		}
 
-		return "Empty text.";
+		System.out.println("Text: " + text);
+
+		this.robot.type(text);
+
+		return "Text typed: " + text;
 	}
 
 	public String press_key(Request req, Response res) {
@@ -107,16 +108,17 @@ public class Controller {
 
 		String tmp = params.getString("movements");
 
-		if (tmp != null && !tmp.equals("")) {
-			System.out.println("Movements: " + tmp);
-
-			JSONArray movements = new JSONArray(tmp);
-			this.robot.move_mouse(movements);
-
-			return "Movements done: " + tmp;
+		if (tmp == null || tmp.isEmpty()) {
+			res.status(400);
+			return "Empty movements.";
 		}
 
-		return "Empty text.";
+		System.out.println("Movements: " + tmp);
+
+		JSONArray movements = new JSONArray(tmp);
+		this.robot.move_mouse(movements);
+
+		return "Movements done: " + tmp;
 	}
 
 	public String mouse_down(Request req, Response res) {
@@ -125,28 +127,31 @@ public class Controller {
 
 		String button = params.getString("button");
 
-		if (button != null && !button.equals("")) {
-			System.out.println("mouse_down.Button: " + button);
-
-			button = button.toLowerCase();
-			switch (button) {
-				case "left":
-					this.robot.mouse_down(InputEvent.BUTTON1_DOWN_MASK);
-					break;
-				case "middle":
-					this.robot.mouse_down(InputEvent.BUTTON2_DOWN_MASK);
-					break;
-				case "right":
-					this.robot.mouse_down(InputEvent.BUTTON3_DOWN_MASK);
-					break;
-				default:
-					break;
-			}
-
-			return "Mouse pressed: " + button;
+		if (button == null || button.isEmpty()) {
+			res.status(400);
+			return "Empty mouse button to press.";
 		}
 
-		return "Empty text.";
+		System.out.println("mouse_down.Button: " + button);
+
+		button = button.toLowerCase();
+		switch (button) {
+			case "left":
+				this.robot.mouse_down(InputEvent.BUTTON1_DOWN_MASK);
+				break;
+			case "middle":
+				this.robot.mouse_down(InputEvent.BUTTON2_DOWN_MASK);
+				break;
+			case "right":
+				this.robot.mouse_down(InputEvent.BUTTON3_DOWN_MASK);
+				break;
+			default: {
+				res.status(400);
+				return "Invalid mouse button to press.";
+			}
+		}
+
+		return "Mouse button pressed: " + button;
 	}
 
 	public String mouse_up(Request req, Response res) {
@@ -155,28 +160,31 @@ public class Controller {
 
 		String button = params.getString("button");
 
-		if (button != null && !button.equals("")) {
-			System.out.println("mouse_up.Button: " + button);
-
-			button = button.toLowerCase();
-			switch (button) {
-				case "left":
-					this.robot.mouse_up(InputEvent.BUTTON1_DOWN_MASK);
-					break;
-				case "middle":
-					this.robot.mouse_up(InputEvent.BUTTON2_DOWN_MASK);
-					break;
-				case "right":
-					this.robot.mouse_up(InputEvent.BUTTON3_DOWN_MASK);
-					break;
-				default:
-					break;
-			}
-
-			return "Mouse pressed: " + button;
+		if (button == null || button.isEmpty()) {
+			res.status(400);
+			return "Empty mouse button to release.";
 		}
 
-		return "Empty text.";
+		System.out.println("mouse_up.Button: " + button);
+
+		button = button.toLowerCase();
+		switch (button) {
+			case "left":
+				this.robot.mouse_up(InputEvent.BUTTON1_DOWN_MASK);
+				break;
+			case "middle":
+				this.robot.mouse_up(InputEvent.BUTTON2_DOWN_MASK);
+				break;
+			case "right":
+				this.robot.mouse_up(InputEvent.BUTTON3_DOWN_MASK);
+				break;
+			default: {
+				res.status(400);
+				return "Invalid mouse button to release.";
+			}
+		}
+
+		return "Mouse button released: " + button;
 	}
 
 	public String mouse_click(Request req, Response res) {
@@ -191,33 +199,36 @@ public class Controller {
 
 		String button = params.getString("button");
 
-		if (button != null && !button.equals("")) {
-			System.out.println("mouse_click.Button: " + button + "; Sensibility: " + sensibility);
-
-			button = button.toLowerCase();
-			switch (button) {
-				case "left":
-					this.robot.mouse_click(InputEvent.BUTTON1_DOWN_MASK);
-					break;
-				case "middle":
-					this.robot.mouse_click(InputEvent.BUTTON2_DOWN_MASK);
-					break;
-				case "right":
-					this.robot.mouse_click(InputEvent.BUTTON3_DOWN_MASK);
-					break;
-				case "scroll_up":
-					this.robot.scroll_up(sensibility);
-					break;
-				case "scroll_down":
-					this.robot.scroll_down(sensibility);
-					break;
-				default:
-					break;
-			}
-
-			return "Mouse pressed: " + button;
+		if (button == null || button.isEmpty()) {
+			res.status(400);
+			return "Empty mouse button to click/scroll.";
 		}
 
-		return "Empty text.";
+		System.out.println("mouse_click.Button: " + button + "; Sensibility: " + sensibility);
+
+		button = button.toLowerCase();
+		switch (button) {
+			case "left":
+				this.robot.mouse_click(InputEvent.BUTTON1_DOWN_MASK);
+				break;
+			case "middle":
+				this.robot.mouse_click(InputEvent.BUTTON2_DOWN_MASK);
+				break;
+			case "right":
+				this.robot.mouse_click(InputEvent.BUTTON3_DOWN_MASK);
+				break;
+			case "scroll_up":
+				this.robot.scroll_up(sensibility);
+				break;
+			case "scroll_down":
+				this.robot.scroll_down(sensibility);
+				break;
+			default: {
+				res.status(400);
+				return "Invalid mouse button to click/scroll.";
+			}
+		}
+
+		return "Mouse button clicked/scrolled: " + button;
 	}
 }
