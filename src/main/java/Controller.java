@@ -23,8 +23,9 @@ public class Controller {
 
 		List<String> cmds = params.get("commands[]");
 
-		System.out.println("Cmds: " + cmds);
 		if (cmds != null && cmds.size() > 0) {
+			System.out.println("Cmds: " + cmds);
+
 			String[] commands = cmds.toArray(new String[0]);
 			this.robot.exec(commands);
 
@@ -40,8 +41,9 @@ public class Controller {
 
 		String text = params.getString("text");
 
-		System.out.println("Text: " + text);
-		if (!text.equals("")) {
+		if (text != null && !text.equals("")) {
+			System.out.println("Text: " + text);
+
 			this.robot.type(text);
 
 			return "Text typed: " + text;
@@ -56,8 +58,9 @@ public class Controller {
 
 		String tmp = params.getString("movements");
 
-		System.out.println("Movements: " + tmp);
-		if (!tmp.equals("")) {
+		if (tmp != null && !tmp.equals("")) {
+			System.out.println("Movements: " + tmp);
+
 			JSONArray movements = new JSONArray(tmp);
 			this.robot.move_mouse(movements);
 
@@ -71,10 +74,12 @@ public class Controller {
 		MultiMap<String> params = new MultiMap<String>();
 		UrlEncoded.decodeTo(req.body(), params, "UTF-8");
 
-		String button = params.getString("button").toLowerCase();
+		String button = params.getString("button");
 
-		System.out.println("mouse_down.Button: " + button);
-		if (!button.equals("")) {
+		if (button != null && !button.equals("")) {
+			System.out.println("mouse_down.Button: " + button);
+
+			button = button.toLowerCase();
 			switch (button) {
 				case "left":
 					this.robot.mouse_down(InputEvent.BUTTON1_DOWN_MASK);
@@ -99,10 +104,12 @@ public class Controller {
 		MultiMap<String> params = new MultiMap<String>();
 		UrlEncoded.decodeTo(req.body(), params, "UTF-8");
 
-		String button = params.getString("button").toLowerCase();
+		String button = params.getString("button");
 
-		System.out.println("mouse_up.Button: " + button);
-		if (!button.equals("")) {
+		if (button != null && !button.equals("")) {
+			System.out.println("mouse_up.Button: " + button);
+
+			button = button.toLowerCase();
 			switch (button) {
 				case "left":
 					this.robot.mouse_up(InputEvent.BUTTON1_DOWN_MASK);
@@ -127,16 +134,18 @@ public class Controller {
 		MultiMap<String> params = new MultiMap<String>();
 		UrlEncoded.decodeTo(req.body(), params, "UTF-8");
 
-		String button = params.getString("button").toLowerCase();
 		int sensibility = 1;
-
 		try {
 			sensibility = Integer.parseInt(params.getString("sensibility"));
 		} catch (NumberFormatException ex) {
 		}
 
-		System.out.println("mouse_click.Button: " + button + ". Sensibility: " + sensibility);
-		if (!button.equals("")) {
+		String button = params.getString("button");
+
+		if (button != null && !button.equals("")) {
+			System.out.println("mouse_click.Button: " + button + "; Sensibility: " + sensibility);
+
+			button = button.toLowerCase();
 			switch (button) {
 				case "left":
 					this.robot.mouse_click(InputEvent.BUTTON1_DOWN_MASK);
