@@ -52,6 +52,40 @@ public class Controller {
 		return "Empty text.";
 	}
 
+	public String press_key(Request req, Response res) {
+		MultiMap<String> params = new MultiMap<String>();
+		UrlEncoded.decodeTo(req.body(), params, "UTF-8");
+
+		String key = params.getString("key");
+
+		if (key != null && !key.equals("")) {
+			System.out.println("press_key.Key: " + key);
+
+			this.robot.press_key(key);
+
+			return "Key pressed: " + key;
+		}
+
+		return "Empty key.";
+	}
+
+	public String release_key(Request req, Response res) {
+		MultiMap<String> params = new MultiMap<String>();
+		UrlEncoded.decodeTo(req.body(), params, "UTF-8");
+
+		String key = params.getString("key");
+
+		if (key != null && !key.equals("")) {
+			System.out.println("release_key.Key: " + key);
+
+			this.robot.release_key(key);
+
+			return "Key released: " + key;
+		}
+
+		return "Empty key.";
+	}
+
 	public String move_mouse(Request req, Response res) {
 		MultiMap<String> params = new MultiMap<String>();
 		UrlEncoded.decodeTo(req.body(), params, "UTF-8");
