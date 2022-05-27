@@ -21,17 +21,6 @@ public class BetterRobot {
         this.robot.setAutoDelay(10);
     }
 
-    // public static void main(String[] args) throws Exception {
-    // Runtime.getRuntime().exec("notepad.exe");
-    // Thread.sleep(1000L);
-    // Keyboard keyboard = new Keyboard();
-    // keyboard.type("`1234567890-=[]\\;',./\n");
-    // keyboard.type("~!@#$%^&*()_+{}|:\"<>?\n");
-    // keyboard.type("abcdefghijklmnopqrstuvwxyz\n\tABCDEFGHIJKLMNOPQRSTUVWXYZ");
-    // keyboard.type("\n\n\twh\bat");
-    // keyboard.exec("ctrl", "f7");
-    // }
-
     /* Type */
     public void type(CharSequence characters) {
         int length = characters.length();
