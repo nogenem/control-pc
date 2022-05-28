@@ -1,6 +1,8 @@
 $(function () {
   const EXEC_URL = window.location.origin + '/exec';
   const TYPE_URL = window.location.origin + '/type';
+  const PRESS_KEY_URL = window.location.origin + '/press_key';
+  const RELEASE_KEY_URL = window.location.origin + '/release_key';
   const MOVE_MOUSE_URL = window.location.origin + '/move_mouse';
   const MOUSE_DOWN_URL = window.location.origin + '/mouse_down';
   const MOUSE_UP_URL = window.location.origin + '/mouse_up';
@@ -13,6 +15,11 @@ $(function () {
     RIGHT: 'RIGHT',
     SCROLL_UP: 'SCROLL_UP',
     SCROLL_DOWN: 'SCROLL_DOWN',
+  };
+  const BTN_TOGGLE_STATES = {
+    UNTOGGLED: 0,
+    TOGGLED: 1,
+    PRESSED: 2,
   };
 
   const mainContainer = $('#main-container');
@@ -37,6 +44,14 @@ $(function () {
     [MOUSE_BUTTONS.RIGHT]: { timer: null, clicked: false },
     [MOUSE_BUTTONS.SCROLL_UP]: { timer: null, clicked: false },
     [MOUSE_BUTTONS.SCROLL_DOWN]: { timer: null, clicked: false },
+  };
+
+  const keyboardBtnData = {
+    // [btn.key]: { timer: null, clicked: false },
+  };
+
+  const keyboardModifiersToggleState = {
+    // [btn.key]: BTN_TOGGLE_STATES,
   };
 
   commandsSelect.select2({
@@ -210,10 +225,104 @@ $(function () {
     insertKeyboardButtons(layout);
   }
 
+  function onMouseDown_ModifierKey(key) {
+    if (keyboardModifiersToggleState[key] === undefined) {
+      keyboardModifiersToggleState[key] = BTN_TOGGLE_STATES.UNTOGGLED;
+    }
+
+    switch (keyboardModifiersToggleState[key]) {
+      case BTN_TOGGLE_STATES.UNTOGGLED:
+        keyboardModifiersToggleState[key] = BTN_TOGGLE_STATES.TOGGLED;
+        keyboardWrapper.find(`button[data-key="${key}"]`).addClass('toggled');
+        break;
+      case BTN_TOGGLE_STATES.TOGGLED:
+        keyboardModifiersToggleState[key] = BTN_TOGGLE_STATES.PRESSED;
+        keyboardWrapper.find(`button[data-key="${key}"]`).addClass('underline');
+        sendPressKey(key, true);
+        break;
+      case BTN_TOGGLE_STATES.PRESSED:
+        keyboardModifiersToggleState[key] = BTN_TOGGLE_STATES.UNTOGGLED;
+        keyboardWrapper
+          .find(`button[data-key="${key}"]`)
+          .removeClass('toggled underline');
+        sendReleaseKey(key, true);
+        break;
+    }
+  }
+
+  function untoggleAllModifierKeys() {
+    Object.keys(keyboardModifiersToggleState).forEach(key => {
+      if (keyboardModifiersToggleState[key] === BTN_TOGGLE_STATES.TOGGLED) {
+        keyboardModifiersToggleState[key] = BTN_TOGGLE_STATES.UNTOGGLED;
+        keyboardWrapper
+          .find(`button[data-key="${key}"]`)
+          .removeClass('toggled');
+      }
+    });
+  }
+
+  function resendPressKey(key) {
+    sendPressKey(key);
+
+    keyboardBtnData[key].timer = setTimeout(() => {
+      resendPressKey(key);
+    }, 100);
+  }
+
+  function onMouseDown_Keyboard(e) {
+    const target = $(e.target).closest('button');
+    const key = `${target.data('key')}`;
+
+    e.preventDefault();
+
+    if (!isModifierKey(key)) {
+      if (!keyboardBtnData[key])
+        keyboardBtnData[key] = { timer: null, clicked: false };
+      else if (keyboardBtnData[key].clicked) return true;
+
+      keyboardBtnData[key].clicked = true;
+
+      sendPressKey(key);
+
+      keyboardBtnData[key].timer = setTimeout(() => {
+        resendPressKey(key);
+      }, 500);
+    } else {
+      onMouseDown_ModifierKey(key);
+    }
+  }
+
+  function onMouseUp_Keyboard(e) {
+    const target = $(e.target).closest('button');
+    const key = `${target.data('key')}`;
+
+    e.preventDefault();
+
+    if (isModifierKey(key)) return true;
+
+    if (!keyboardBtnData[key])
+      keyboardBtnData[key] = { timer: null, clicked: false };
+    else if (!keyboardBtnData[key].clicked) return true;
+
+    if (!!keyboardBtnData[key].timer) {
+      clearTimeout(keyboardBtnData[key].timer);
+      keyboardBtnData[key].timer = null;
+    }
+
+    sendReleaseKey(key);
+
+    keyboardBtnData[key].clicked = false;
+
+    untoggleAllModifierKeys();
+  }
+
   keyboardLayoutSelect.select2({ width: '100%', minimumResultsForSearch: -1 });
   keyboardLayoutSelect.change(onChange_KeyboardLayout);
 
   keyboardLayoutSelect.trigger('change');
+
+  keyboardWrapper.on('touchstart mousedown', '.btn', onMouseDown_Keyboard);
+  keyboardWrapper.on('touchend mouseup', '.btn', onMouseUp_Keyboard);
 
   if (screen.orientation) {
     screen.orientation.addEventListener(
@@ -496,6 +605,7 @@ $(function () {
       method: 'POST',
       data: {
         commands,
+        layout: keyboardLayoutSelect.val(),
       },
     });
   }
@@ -506,6 +616,47 @@ $(function () {
       method: 'POST',
       data: {
         text,
+      },
+    });
+  }
+
+  function sendPressKey(key, isModifierKey = false) {
+    if (!isModifierKey) {
+      const toggledModifierKeys = getToggledModifierKeys();
+
+      if (toggledModifierKeys.length > 0) {
+        toggledModifierKeys.push(key);
+
+        return sendCommands(toggledModifierKeys);
+      }
+    }
+
+    $.ajax({
+      url: PRESS_KEY_URL,
+      method: 'POST',
+      data: {
+        key,
+        layout: keyboardLayoutSelect.val(),
+      },
+    });
+  }
+
+  function sendReleaseKey(key, isModifierKey = false) {
+    if (!isModifierKey) {
+      const toggledModifierKeys = getToggledModifierKeys();
+
+      if (toggledModifierKeys.length > 0) {
+        // In this case, i did send a command instead of press before
+        return;
+      }
+    }
+
+    $.ajax({
+      url: RELEASE_KEY_URL,
+      method: 'POST',
+      data: {
+        key,
+        layout: keyboardLayoutSelect.val(),
       },
     });
   }
@@ -607,5 +758,21 @@ $(function () {
   function getMainContainerWidth(v) {
     const w = mainContainer[0].clientWidth;
     return (v * w) / 100;
+  }
+
+  function isModifierKey(key) {
+    return !!key.match(
+      /_(shift|ctrl|control|win|windows|cmd|command|alt|alt_gr|alt_graph)_/i,
+    );
+  }
+
+  function getToggledModifierKeys() {
+    const ret = [];
+    Object.keys(keyboardModifiersToggleState).forEach(key => {
+      if (keyboardModifiersToggleState[key] === BTN_TOGGLE_STATES.TOGGLED) {
+        ret.push(key);
+      }
+    });
+    return ret;
   }
 });

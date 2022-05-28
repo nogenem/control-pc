@@ -145,3 +145,12 @@
 .keyboard-button-text-wrapper > div > span:last-child {
     text-align: right;
 }
+
+#keyboard-wrapper button.toggled {
+    /* Same color as with :focus */
+    background-color: #1d7d74;
+}
+
+#keyboard-wrapper button.underline {
+    text-decoration: underline;
+}
