@@ -250,12 +250,7 @@ $(function () {
     }, 100);
   }
 
-  function onMouseDown_Keyboard(e) {
-    const target = $(e.target).closest('button');
-    const key = `${target.data('key')}`;
-
-    e.preventDefault();
-
+  function handleOnMouseDown_Keyboard(key) {
     if (!isModifierKey(key)) {
       if (!keyboardBtnData[key])
         keyboardBtnData[key] = { timer: null, clicked: false };
@@ -271,6 +266,19 @@ $(function () {
     } else {
       onMouseDown_ModifierKey(key);
     }
+  }
+
+  function onMouseDown_Keyboard(e) {
+    const target = $(e.target).closest('button');
+    const key = `${target.data('key')}`;
+
+    e.preventDefault();
+
+    setTimeout(() => {
+      handleOnMouseDown_Keyboard(key);
+    }, 50);
+
+    return true;
   }
 
   function onMouseUp_Keyboard(e) {
