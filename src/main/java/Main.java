@@ -28,17 +28,18 @@ public class Main {
 	}
 
 	private static void setupSpark() {
-		// if(!Main.IP_ADRESS.equals(""))
-		// ipAddress(Main.IP_ADRESS);
 		Spark.port(Main.PORT);
 
-		// Spark.staticFiles.location("/public");
 		if (!Main.isInsideJar()) {
 			String projectDir = System.getProperty("user.dir");
 			String staticDir = "/src/main/resources/public";
 			Spark.staticFiles.externalLocation(projectDir + staticDir);
 		} else {
-			Spark.staticFiles.location("/resources/public");
+			if (Main.isPublicFolderInsideTheRootFolder()) {
+				Spark.staticFiles.location("/public");
+			} else {
+				Spark.staticFiles.location("/resources/public");
+			}
 		}
 
 		Spark.exception(Exception.class, (e, req, res) -> {
@@ -79,6 +80,11 @@ public class Main {
 	private static boolean isInsideJar() {
 		URL path = Main.class.getResource("Main.class");
 		return path.toString().startsWith("jar:");
+	}
+
+	private static boolean isPublicFolderInsideTheRootFolder() {
+		URL resource = Main.class.getResource("/public/index.html");
+		return resource != null;
 	}
 
 	private static String getIpAdress() {
