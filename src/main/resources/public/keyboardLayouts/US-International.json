@@ -1,0 +1,1652 @@
+[
+    [
+        {
+            "labels": [
+                "<i class=\"material-icons\">skip_previous</i>"
+            ],
+            "key": "_skip_previous_",
+            "keyCodes": [
+                [
+                    "CONTROL",
+                    "F8"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "<i class=\"material-icons\">play_arrow</i>"
+            ],
+            "key": "_play_pause_",
+            "keyCodes": [
+                [
+                    "CONTROL",
+                    "F7"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "<i class=\"material-icons\">skip_next</i>"
+            ],
+            "key": "_skip_next_",
+            "keyCodes": [
+                [
+                    "CONTROL",
+                    "F9"
+                ]
+            ],
+            "width": 1,
+            "height": 1,
+            "marginRight": {
+                "px": 0,
+                "width": 1
+            }
+        },
+        {
+            "labels": [
+                "<i class=\"material-icons\">volume_up</i>"
+            ],
+            "key": "_volume_up_",
+            "keyCodes": [
+                [
+                    "CONTROL",
+                    "F11"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "<i class=\"material-icons\">volume_off</i>"
+            ],
+            "key": "_mute_",
+            "keyCodes": [
+                [
+                    "CONTROL",
+                    "F10"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "<i class=\"material-icons\">volume_down</i>"
+            ],
+            "key": "_volume_down_",
+            "keyCodes": [
+                [
+                    "CONTROL",
+                    "F12"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        }
+    ],
+    [
+        {
+            "labels": [
+                "Esc"
+            ],
+            "key": "_esc_",
+            "keyCodes": [
+                [
+                    "ESCAPE"
+                ]
+            ],
+            "width": 1,
+            "height": 1,
+            "marginRight": 8
+        },
+        {
+            "labels": [
+                "F1"
+            ],
+            "key": "_f1_",
+            "keyCodes": [
+                [
+                    "F1"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "F2"
+            ],
+            "key": "_f2_",
+            "keyCodes": [
+                [
+                    "F2"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "F3"
+            ],
+            "key": "_f3_",
+            "keyCodes": [
+                [
+                    "F3"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "F4"
+            ],
+            "key": "_f4_",
+            "keyCodes": [
+                [
+                    "F4"
+                ]
+            ],
+            "width": 1,
+            "height": 1,
+            "marginRight": 8
+        },
+        {
+            "labels": [
+                "F5"
+            ],
+            "key": "_f5_",
+            "keyCodes": [
+                [
+                    "F5"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "F6"
+            ],
+            "key": "_f6_",
+            "keyCodes": [
+                [
+                    "F6"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "F7"
+            ],
+            "key": "_f7_",
+            "keyCodes": [
+                [
+                    "F7"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "F8"
+            ],
+            "key": "_f8_",
+            "keyCodes": [
+                [
+                    "F8"
+                ]
+            ],
+            "width": 1,
+            "height": 1,
+            "marginRight": 8
+        },
+        {
+            "labels": [
+                "F9"
+            ],
+            "key": "_f9_",
+            "keyCodes": [
+                [
+                    "F9"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "F10"
+            ],
+            "key": "_f10_",
+            "keyCodes": [
+                [
+                    "F10"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "F11"
+            ],
+            "key": "_f11_",
+            "keyCodes": [
+                [
+                    "F11"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "F12"
+            ],
+            "key": "_f12_",
+            "keyCodes": [
+                [
+                    "F12"
+                ]
+            ],
+            "width": 1,
+            "height": 1,
+            "marginRight": {
+                "px": -16,
+                "width": 2
+            }
+        },
+        {
+            "labels": [],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [],
+            "width": 1,
+            "height": 1,
+            "marginRight": 8
+        },
+        {
+            "labels": [],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "Print"
+            ],
+            "key": "_print_",
+            "keyCodes": [
+                [
+                    "PRINTSCREEN"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "Lock"
+            ],
+            "key": "_scroll_lock_",
+            "keyCodes": [
+                [
+                    "SCROLL_LOCK"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "Pause"
+            ],
+            "key": "_pause_break_",
+            "keyCodes": [
+                [
+                    "PAUSE"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        }
+    ],
+    [
+        {
+            "labels": [
+                "~",
+                "",
+                "`",
+                ""
+            ],
+            "key": "`",
+            "keyCodes": [
+                [
+                    "DEAD_GRAVE"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "!",
+                "¹",
+                "1",
+                "¡"
+            ],
+            "key": "1",
+            "keyCodes": [
+                [
+                    "1"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "@",
+                "",
+                "2",
+                "²"
+            ],
+            "key": "2",
+            "keyCodes": [
+                [
+                    "2"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "#",
+                "",
+                "3",
+                "³"
+            ],
+            "key": "3",
+            "keyCodes": [
+                [
+                    "3"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "$",
+                "£",
+                "4",
+                "¤"
+            ],
+            "key": "4",
+            "keyCodes": [
+                [
+                    "4"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "%",
+                "",
+                "5",
+                "€"
+            ],
+            "key": "5",
+            "keyCodes": [
+                [
+                    "5"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "^",
+                "",
+                "6",
+                "¼"
+            ],
+            "key": "6",
+            "keyCodes": [
+                [
+                    "6"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "&",
+                "",
+                "7",
+                "½"
+            ],
+            "key": "7",
+            "keyCodes": [
+                [
+                    "7"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "*",
+                "",
+                "8",
+                "¾"
+            ],
+            "key": "8",
+            "keyCodes": [
+                [
+                    "8"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "(",
+                "",
+                "9",
+                "‘"
+            ],
+            "key": "9",
+            "keyCodes": [
+                [
+                    "9"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                ")",
+                "",
+                "0",
+                "’"
+            ],
+            "key": "0",
+            "keyCodes": [
+                [
+                    "0"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "_",
+                "",
+                "-",
+                "¥"
+            ],
+            "key": "-",
+            "keyCodes": [
+                [
+                    "MINUS"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "+",
+                "÷",
+                "=",
+                "×"
+            ],
+            "key": "=",
+            "keyCodes": [
+                [
+                    "EQUALS"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "↤"
+            ],
+            "key": "_backspace_",
+            "keyCodes": [
+                [
+                    "BACK_SPACE"
+                ]
+            ],
+            "width": 2,
+            "height": 1,
+            "marginRight": 8
+        },
+        {
+            "labels": [
+                "Insert"
+            ],
+            "key": "_insert_",
+            "keyCodes": [
+                [
+                    "INSERT"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "Home"
+            ],
+            "key": "_home_",
+            "keyCodes": [
+                [
+                    "HOME"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "Page Up"
+            ],
+            "key": "_page_up_",
+            "keyCodes": [
+                [
+                    "PAGE_UP"
+                ]
+            ],
+            "width": 1,
+            "height": 1,
+            "marginRight": 8
+        },
+        {
+            "labels": [
+                "Num Lock"
+            ],
+            "key": "_num_lock_",
+            "keyCodes": [
+                [
+                    "NUM_LOCK"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "/"
+            ],
+            "key": "_numpad_/_",
+            "keyCodes": [
+                [
+                    "DIVIDE"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "*"
+            ],
+            "key": "_numpad_*_",
+            "keyCodes": [
+                [
+                    "MULTIPLY"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "-"
+            ],
+            "key": "_numpad_-_",
+            "keyCodes": [
+                [
+                    "SUBTRACT"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        }
+    ],
+    [
+        {
+            "labels": [
+                "Tab"
+            ],
+            "key": "_tab_",
+            "keyCodes": [
+                [
+                    "TAB"
+                ]
+            ],
+            "width": 1.5,
+            "height": 1
+        },
+        {
+            "labels": [
+                "",
+                "Ä",
+                "Q",
+                "ä"
+            ],
+            "key": "q",
+            "keyCodes": [
+                [
+                    "q"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "",
+                "Å",
+                "W",
+                "å"
+            ],
+            "key": "w",
+            "keyCodes": [
+                [
+                    "w"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "",
+                "É",
+                "E",
+                "é"
+            ],
+            "key": "e",
+            "keyCodes": [
+                [
+                    "e"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "",
+                "",
+                "R",
+                "®"
+            ],
+            "key": "r",
+            "keyCodes": [
+                [
+                    "r"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "",
+                "Þ",
+                "T",
+                "þ"
+            ],
+            "key": "t",
+            "keyCodes": [
+                [
+                    "t"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "",
+                "Ü",
+                "Y",
+                "ü"
+            ],
+            "key": "y",
+            "keyCodes": [
+                [
+                    "y"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "",
+                "Ú",
+                "U",
+                "ú"
+            ],
+            "key": "u",
+            "keyCodes": [
+                [
+                    "u"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "",
+                "Í",
+                "I",
+                "í"
+            ],
+            "key": "i",
+            "keyCodes": [
+                [
+                    "i"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "",
+                "Ó",
+                "O",
+                "ó"
+            ],
+            "key": "o",
+            "keyCodes": [
+                [
+                    "o"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "",
+                "Ö",
+                "P",
+                "ö"
+            ],
+            "key": "p",
+            "keyCodes": [
+                [
+                    "p"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "{",
+                "",
+                "[",
+                "«"
+            ],
+            "key": "[",
+            "keyCodes": [
+                [
+                    "OPEN_BRACKET"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "}",
+                "",
+                "]",
+                "»"
+            ],
+            "key": "]",
+            "keyCodes": [
+                [
+                    "CLOSE_BRACKET"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "Enter"
+            ],
+            "key": "_enter_",
+            "keyCodes": [
+                [
+                    "ENTER"
+                ]
+            ],
+            "width": 1.5,
+            "height": 2,
+            "marginRight": 8
+        },
+        {
+            "labels": [
+                "Del"
+            ],
+            "key": "_del_",
+            "keyCodes": [
+                [
+                    "DELETE"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "End"
+            ],
+            "key": "_end_",
+            "keyCodes": [
+                [
+                    "END"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "Page Down"
+            ],
+            "key": "_page_down_",
+            "keyCodes": [
+                [
+                    "PAGE_DOWN"
+                ]
+            ],
+            "width": 1,
+            "height": 1,
+            "marginRight": 8
+        },
+        {
+            "labels": [
+                "7"
+            ],
+            "key": "_numpad_7_",
+            "keyCodes": [
+                [
+                    "NUMPAD7"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "8"
+            ],
+            "key": "_numpad_8_",
+            "keyCodes": [
+                [
+                    "NUMPAD8"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "9"
+            ],
+            "key": "_numpad_9_",
+            "keyCodes": [
+                [
+                    "NUMPAD9"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "+"
+            ],
+            "key": "_numpad_+_",
+            "keyCodes": [
+                [
+                    "ADD"
+                ]
+            ],
+            "width": 1,
+            "height": 2
+        }
+    ],
+    [
+        {
+            "labels": [
+                "Caps"
+            ],
+            "key": "_caps_lock_",
+            "keyCodes": [
+                [
+                    "CAPS_LOCK"
+                ]
+            ],
+            "width": 1.5,
+            "height": 1
+        },
+        {
+            "labels": [
+                "",
+                "Á",
+                "A",
+                "á"
+            ],
+            "key": "a",
+            "keyCodes": [
+                [
+                    "a"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "",
+                "§",
+                "S",
+                "ß"
+            ],
+            "key": "s",
+            "keyCodes": [
+                [
+                    "s"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "",
+                "",
+                "D",
+                "ð"
+            ],
+            "key": "d",
+            "keyCodes": [
+                [
+                    "d"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "F"
+            ],
+            "key": "f",
+            "keyCodes": [
+                [
+                    "f"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "G"
+            ],
+            "key": "g",
+            "keyCodes": [
+                [
+                    "g"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "H"
+            ],
+            "key": "h",
+            "keyCodes": [
+                [
+                    "h"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "J"
+            ],
+            "key": "j",
+            "keyCodes": [
+                [
+                    "j"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "K"
+            ],
+            "key": "k",
+            "keyCodes": [
+                [
+                    "k"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "",
+                "Ø",
+                "L",
+                "ø"
+            ],
+            "key": "l",
+            "keyCodes": [
+                [
+                    "l"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                ":",
+                "°",
+                ";",
+                "¶"
+            ],
+            "key": ";",
+            "keyCodes": [
+                [
+                    "SEMICOLON"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "\"",
+                "¨",
+                "'",
+                "´"
+            ],
+            "key": "'",
+            "keyCodes": [
+                [
+                    "DEAD_ACUTE"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "|",
+                "¦",
+                "\\",
+                "¬"
+            ],
+            "key": "\\",
+            "keyCodes": [
+                [
+                    "BACK_SLASH"
+                ]
+            ],
+            "width": 1,
+            "height": 1,
+            "marginRight": {
+                "px": 8,
+                "width": 1.5
+            }
+        },
+        {
+            "labels": [],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [],
+            "width": 1,
+            "height": 1,
+            "marginRight": 8
+        },
+        {
+            "labels": [
+                "4"
+            ],
+            "key": "_numpad_4_",
+            "keyCodes": [
+                [
+                    "NUMPAD4"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "5"
+            ],
+            "key": "_numpad_5_",
+            "keyCodes": [
+                [
+                    "NUMPAD5"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "6"
+            ],
+            "key": "_numpad_6_",
+            "keyCodes": [
+                [
+                    "NUMPAD6"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        }
+    ],
+    [
+        {
+            "labels": [
+                "Shift"
+            ],
+            "key": "_shift_",
+            "keyCodes": [
+                [
+                    "SHIFT"
+                ]
+            ],
+            "width": 1.8,
+            "height": 1
+        },
+        {
+            "labels": [
+                "|",
+                "",
+                "\\",
+                ""
+            ],
+            "key": "\\",
+            "keyCodes": [
+                [
+                    "BACK_SLASH"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "",
+                "Æ",
+                "Z",
+                "æ"
+            ],
+            "key": "z",
+            "keyCodes": [
+                [
+                    "z"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "X"
+            ],
+            "key": "x",
+            "keyCodes": [
+                [
+                    "x"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "",
+                "¢",
+                "C",
+                "©"
+            ],
+            "key": "c",
+            "keyCodes": [
+                [
+                    "c"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "V"
+            ],
+            "key": "v",
+            "keyCodes": [
+                [
+                    "v"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "B"
+            ],
+            "key": "b",
+            "keyCodes": [
+                [
+                    "b"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "",
+                "Ñ",
+                "N",
+                "ñ"
+            ],
+            "key": "n",
+            "keyCodes": [
+                [
+                    "n"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "M"
+            ],
+            "key": "m",
+            "keyCodes": [
+                [
+                    "m"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "<",
+                "Ç",
+                ",",
+                "ç"
+            ],
+            "key": ",",
+            "keyCodes": [
+                [
+                    "COMMA"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                ">",
+                "",
+                ".",
+                ""
+            ],
+            "key": ".",
+            "keyCodes": [
+                [
+                    "PERIOD"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "?",
+                "",
+                "/",
+                "¿"
+            ],
+            "key": "/",
+            "keyCodes": [
+                [
+                    "SLASH"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "Shift"
+            ],
+            "key": "_shift_",
+            "keyCodes": [
+                [
+                    "SHIFT"
+                ]
+            ],
+            "width": 2.2,
+            "height": 1,
+            "marginRight": 8
+        },
+        {
+            "labels": [],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "↑"
+            ],
+            "key": "_up_",
+            "keyCodes": [
+                [
+                    "UP"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [],
+            "width": 1,
+            "height": 1,
+            "marginRight": 8
+        },
+        {
+            "labels": [
+                "1"
+            ],
+            "key": "_numpad_1_",
+            "keyCodes": [
+                [
+                    "NUMPAD1"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "2"
+            ],
+            "key": "_numpad_2_",
+            "keyCodes": [
+                [
+                    "NUMPAD2"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "3"
+            ],
+            "key": "_numpad_3_",
+            "keyCodes": [
+                [
+                    "NUMPAD3"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "Enter"
+            ],
+            "key": "_enter_",
+            "keyCodes": [
+                [
+                    "ENTER"
+                ]
+            ],
+            "width": 1,
+            "height": 2
+        }
+    ],
+    [
+        {
+            "labels": [
+                "Ctrl"
+            ],
+            "key": "_ctrl_",
+            "keyCodes": [
+                [
+                    "CONTROL"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "Win"
+            ],
+            "key": "_win_",
+            "keyCodes": [
+                [
+                    "WINDOWS"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "Alt"
+            ],
+            "key": "_alt_",
+            "keyCodes": [
+                [
+                    "ALT"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "Space"
+            ],
+            "key": "_space_",
+            "keyCodes": [
+                [
+                    "SPACE"
+                ]
+            ],
+            "width": 8,
+            "height": 1
+        },
+        {
+            "labels": [
+                "Alt Gr"
+            ],
+            "key": "_alt_gr_",
+            "keyCodes": [
+                [
+                    "ALT_GRAPH"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "Win"
+            ],
+            "key": "_win_",
+            "keyCodes": [
+                [
+                    "WINDOWS"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "Menu"
+            ],
+            "key": "_context_menu_",
+            "keyCodes": [
+                [
+                    "CONTEXT_MENU"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "Ctrl"
+            ],
+            "key": "_ctrl_",
+            "keyCodes": [
+                [
+                    "CONTROL"
+                ]
+            ],
+            "width": 1,
+            "height": 1,
+            "marginRight": 8
+        },
+        {
+            "labels": [
+                "←"
+            ],
+            "key": "_left_",
+            "keyCodes": [
+                [
+                    "LEFT"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "↓"
+            ],
+            "key": "_down_",
+            "keyCodes": [
+                [
+                    "DOWN"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        },
+        {
+            "labels": [
+                "→"
+            ],
+            "key": "_right_",
+            "keyCodes": [
+                [
+                    "RIGHT"
+                ]
+            ],
+            "width": 1,
+            "height": 1,
+            "marginRight": 8
+        },
+        {
+            "labels": [
+                "0"
+            ],
+            "key": "_numpad_0_",
+            "keyCodes": [
+                [
+                    "NUMPAD0"
+                ]
+            ],
+            "width": 2,
+            "height": 1
+        },
+        {
+            "labels": [
+                "."
+            ],
+            "key": "_numpad_._",
+            "keyCodes": [
+                [
+                    "DECIMAL"
+                ]
+            ],
+            "width": 1,
+            "height": 1
+        }
+    ]
+]
