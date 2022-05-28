@@ -5,7 +5,7 @@
   A simple way to control your pc using a cellphone.
 </h4>
 <p align="center">
-  <img alt="Front-end image" src="https://i.imgur.com/mGn3KHh.png">
+  <img alt="Front-end image" src="https://i.imgur.com/7QpEFGm.png">
 </p>
 
 
