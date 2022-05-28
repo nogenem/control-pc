@@ -23,8 +23,6 @@ $(function () {
   };
 
   const mainContainer = $('#main-container');
-  const commandsSelect = $('#command-select');
-  const commandsCheckboxes = $('.checkboxes-wrapper > p input');
   const textarea = $('#text-command');
   const mouseArea = $('.mouse-area');
   const sensibilityInput = $('#sensibility-input');
@@ -53,23 +51,6 @@ $(function () {
   const keyboardModifiersToggleState = {
     // [btn.key]: BTN_TOGGLE_STATES,
   };
-
-  commandsSelect.select2({
-    width: '100%',
-    tags: true,
-    createTag: function (params) {
-      var term = $.trim(params.term);
-
-      if (term === '') {
-        return null;
-      }
-
-      return {
-        id: term,
-        text: term,
-      };
-    },
-  });
 
   window.document.addEventListener('mouseup', onMouseUp);
   window.document.addEventListener('touchend', onMouseUp);
@@ -342,45 +323,6 @@ $(function () {
     );
   }
 
-  /* Media Controls */
-  $('.media-controls-wrapper button:not(.dont-show)').click(function (e) {
-    const btn = $(this);
-
-    try {
-      const commands = btn.data('commands');
-      if (!commands || !Array.isArray(commands) || commands.length === 0)
-        return false;
-
-      sendCommands(commands);
-      return true;
-    } catch (err) {
-      console.error(err);
-      return false;
-    }
-  });
-
-  /* Command Controls */
-  $('#send-commands').click(function () {
-    let data = commandsSelect.select2('data');
-    data = data.map(option => option.id);
-
-    const modifierKeys = [];
-    commandsCheckboxes.each(function () {
-      const checkbox = $(this);
-      if (checkbox.is(':checked')) modifierKeys.push(checkbox.data('command'));
-    });
-
-    sendCommands([...modifierKeys, ...data]);
-  });
-
-  $('#clear-commands').click(function () {
-    commandsSelect.val(null).trigger('change');
-    commandsCheckboxes.each(function () {
-      const checkbox = $(this);
-      if (checkbox.is(':checked')) checkbox.parent().click();
-    });
-  });
-
   /* Text Controls */
   $('#send-text').click(function () {
     const text = $.trim(textarea.val());
@@ -526,6 +468,7 @@ $(function () {
     onMouseDown_MouseButtons(e, MOUSE_BUTTONS.RIGHT);
   });
 
+  /* Mouse Scroll */
   $('#scroll-up').on('mousedown touchstart', function (e) {
     if (e.handled) return false;
     e.handled = true;

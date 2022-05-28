@@ -10,38 +10,6 @@
     margin-top: 10px;
 }
 
-.media-controls-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-}
-
-.media-controls-wrapper > div {
-    display: flex;
-}
-
- 
-.media-controls-wrapper button {
-    margin: 5px;
-    width: 52px;
-}
-
-.media-controls-wrapper button.dont-show {
-    visibility: hidden;
-}
-
-.checkboxes-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly; 
-    flex-wrap: wrap;
-}
-
-.checkboxes-wrapper > p {
-    margin-left: 6px !important;
-}
-
 .mouse-area-p {
     margin-bottom: 15px !important;
 }
