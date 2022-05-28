@@ -98,7 +98,50 @@
     margin-bottom: 10px;
 }
 
-/* Arrumar bug entre materialize e select2 */
+/* START Arrumar bug entre materialize e select2 */
 .select2-search.select2-search--inline > input.select2-search__field {
     height: inherit !important;
+}
+/* END Arrumar bug entre materialize e select2 */
+
+#keyboard-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#keyboard-wrapper {
+    position: relative;
+}
+
+.keyboard-button-text-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    line-height: normal;
+    width: 100%;
+    height: 100%;
+}
+
+.keyboard-button-text-wrapper > div {
+    display: flex;
+    width: 100%;
+    height: 50%;
+}
+
+.keyboard-button-text-wrapper > div:last-child {
+    align-items: center;
+}
+
+.keyboard-button-text-wrapper > div > span {
+    width: 50%;
+    height: 50%;
+}
+
+.keyboard-button-text-wrapper > div > span:first-child {
+    text-align: left;
+}
+
+.keyboard-button-text-wrapper > div > span:last-child {
+    text-align: right;
 }

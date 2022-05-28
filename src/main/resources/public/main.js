@@ -5,6 +5,7 @@ $(function () {
   const MOUSE_DOWN_URL = window.location.origin + '/mouse_down';
   const MOUSE_UP_URL = window.location.origin + '/mouse_up';
   const MOUSE_CLICK_URL = window.location.origin + '/mouse_click';
+  const KEYBOARD_LAYOUTS_URL = window.location.origin + '/keyboardLayouts/';
 
   const MOUSE_BUTTONS = {
     LEFT: 'LEFT',
@@ -14,15 +15,21 @@ $(function () {
     SCROLL_DOWN: 'SCROLL_DOWN',
   };
 
+  const mainContainer = $('#main-container');
   const commandsSelect = $('#command-select');
   const commandsCheckboxes = $('.checkboxes-wrapper > p input');
   const textarea = $('#text-command');
   const mouseArea = $('.mouse-area');
   const sensibilityInput = $('#sensibility-input');
+  const keyboardContainer = $('#keyboard-container');
+  const keyboardWrapper = $('#keyboard-wrapper');
+  const keyboardLayoutSelect = $('#keyboard-layout-select');
 
   let lastX = null;
   let lastY = null;
   let mouseMovements = [];
+
+  const keyboard_buttons = {};
 
   const mouseBtnData = {
     [MOUSE_BUTTONS.LEFT]: { timer: null, clicked: false },
@@ -51,6 +58,180 @@ $(function () {
 
   window.document.addEventListener('mouseup', onMouseUp);
   window.document.addEventListener('touchend', onMouseUp);
+
+  /* Keyboard */
+  function insertKeyboardButtons(layout) {
+    keyboardWrapper.empty();
+
+    const BASE_BTN_MARGIN = 2; //px
+    // Se tiver mais altura do que largura
+    const SHOULD_ROTATE_KEYBOARD = vh(1) > getMainContainerWidth(1);
+
+    const MAX_ROWS = keyboard_buttons[layout].length;
+    const MAX_BTNS_IN_A_ROW = Math.max(
+      ...keyboard_buttons[layout].map(row => {
+        return row.reduce((prev, curr) => {
+          return prev + curr.width;
+        }, 0);
+      }),
+    );
+
+    const EXTRA_PADDING = getMainContainerWidth(5); //px
+    const CONTAINER_PADDING =
+      Number.parseInt(mainContainer.find('> div').css('padding-left')) +
+      Number.parseInt(mainContainer.find('> div').css('padding-right')); //px
+    let BASE_BTN_SIZE = 0;
+    if (SHOULD_ROTATE_KEYBOARD) {
+      BASE_BTN_SIZE =
+        (getMainContainerWidth(100) -
+          CONTAINER_PADDING -
+          EXTRA_PADDING -
+          (MAX_ROWS - 1) * BASE_BTN_MARGIN) /
+        MAX_ROWS;
+    } else {
+      BASE_BTN_SIZE =
+        (getMainContainerWidth(100) -
+          CONTAINER_PADDING -
+          EXTRA_PADDING -
+          (MAX_BTNS_IN_A_ROW - 1) * BASE_BTN_MARGIN) /
+        MAX_BTNS_IN_A_ROW;
+    }
+
+    let top = 0;
+    let minWrapperWidth = Number.MIN_VALUE;
+    keyboard_buttons[layout].forEach((row, rowIdx) => {
+      let left = 0;
+      row.forEach((data, elIdx) => {
+        const width =
+          BASE_BTN_SIZE * data.width + (data.width - 1) * BASE_BTN_MARGIN;
+        const height =
+          BASE_BTN_SIZE * data.height + (data.height - 1) * BASE_BTN_MARGIN;
+
+        const button = document.createElement('button');
+        button.className = 'waves-effect waves-light btn';
+        button.style.width = `${width}px`;
+        button.style.height = `${height}px`;
+        button.style.fontSize = `${Math.min(width, height) / 4}px`;
+        button.style.textTransform = 'none';
+        button.dataset.key = data.key;
+
+        if (SHOULD_ROTATE_KEYBOARD) {
+          button.style.padding = 'clamp(1px, 1vw, 10px)';
+        } else {
+          button.style.padding = 'clamp(1px, 0.5vh, 10px)';
+        }
+
+        button.style.position = 'absolute';
+        button.style.top = `${rowIdx * BASE_BTN_SIZE + top}px`;
+        button.style.left = `${left}px`;
+
+        if (data.labels.length === 0) {
+          // just for spacing
+          let html = '';
+          html += '<div class="keyboard-button-text-wrapper">';
+          html += '</div>';
+
+          button.innerHTML = html;
+          button.style.visibility = 'hidden';
+        } else if (data.labels.length === 1) {
+          let html = '';
+          html += '<div class="keyboard-button-text-wrapper">';
+          html += data.labels[0];
+          html += '</div>';
+
+          button.innerHTML = html;
+        } else if (data.labels.length === 4) {
+          let html = '';
+          html += '<div class="keyboard-button-text-wrapper">';
+          html += ' <div>';
+          html += `   <span>${data.labels[0]}</span>`;
+          html += `   <span>${data.labels[1]}</span>`;
+          html += ' </div>';
+          html += ' <div>';
+          html += `   <span>${data.labels[2]}</span>`;
+          html += `   <span>${data.labels[3]}</span>`;
+          html += ' </div>';
+          html += '</div>';
+
+          button.innerHTML = html;
+        }
+
+        keyboardWrapper.append(button);
+
+        let marginRight = 0;
+        if (!!data.marginRight) {
+          if (typeof data.marginRight === 'number') {
+            marginRight = data.marginRight;
+          } else {
+            if (data.marginRight.px) {
+              marginRight = data.marginRight.px;
+            }
+            if (data.marginRight.width) {
+              marginRight +=
+                BASE_BTN_SIZE * data.marginRight.width +
+                data.marginRight.width * BASE_BTN_MARGIN;
+            }
+          }
+        }
+
+        left += width + BASE_BTN_MARGIN + marginRight;
+      });
+      top += BASE_BTN_MARGIN;
+
+      if (left > minWrapperWidth) {
+        minWrapperWidth = left;
+      }
+    });
+    const minWrapperHeight =
+      keyboard_buttons[layout].length * BASE_BTN_SIZE + top;
+    keyboardWrapper[0].style.minHeight = `${minWrapperHeight}px`;
+    keyboardWrapper[0].style.minWidth = `${minWrapperWidth}px`;
+
+    if (SHOULD_ROTATE_KEYBOARD) {
+      keyboardWrapper[0].style.transform =
+        'rotate(90deg) translate3d( 0, 0, 0)';
+    } else {
+      keyboardWrapper[0].style.transform = '';
+    }
+
+    keyboardContainer[0].style.minWidth = keyboardWrapper[0].style.minHeight;
+    keyboardContainer[0].style.minHeight = keyboardWrapper[0].style.minWidth;
+  }
+
+  async function onChange_KeyboardLayout(e) {
+    const layout = e.target.value;
+
+    if (!keyboard_buttons[layout]) {
+      const data = await fetchKeyboardLayoutButtons(layout);
+
+      keyboard_buttons[layout] = data;
+    }
+
+    insertKeyboardButtons(layout);
+  }
+
+  keyboardLayoutSelect.select2({ width: '100%', minimumResultsForSearch: -1 });
+  keyboardLayoutSelect.change(onChange_KeyboardLayout);
+
+  keyboardLayoutSelect.trigger('change');
+
+  if (screen.orientation) {
+    screen.orientation.addEventListener(
+      'change',
+      () => {
+        insertKeyboardButtons(keyboardLayoutSelect.val());
+      },
+      false,
+    );
+  } else {
+    window.addEventListener(
+      'orientationchange',
+      () => {
+        insertKeyboardButtons(keyboardLayoutSelect.val());
+      },
+      false,
+    );
+  }
 
   /* Media Controls */
   $('.media-controls-wrapper button:not(.dont-show)').click(function (e) {
@@ -299,6 +480,16 @@ $(function () {
     return true;
   }
 
+  /* Fetch functions */
+  function fetchKeyboardLayoutButtons(layout) {
+    return $.ajax({
+      url: KEYBOARD_LAYOUTS_URL + layout + '.json',
+      method: 'GET',
+      dataType: 'json',
+    });
+  }
+
+  /* Send functions */
   function sendCommands(commands) {
     $.ajax({
       url: EXEC_URL,
@@ -381,9 +572,40 @@ $(function () {
     });
   }
 
+  /* Utils */
   function isScrollBtn(button) {
     return (
       button === MOUSE_BUTTONS.SCROLL_UP || button === MOUSE_BUTTONS.SCROLL_DOWN
     );
+  }
+
+  // https://stackoverflow.com/a/44109531
+  function vh(v) {
+    var h = Math.max(
+      document.documentElement.clientHeight,
+      window.innerHeight || 0,
+    );
+    return (v * h) / 100;
+  }
+
+  function vw(v) {
+    var w = Math.max(
+      document.documentElement.clientWidth,
+      window.innerWidth || 0,
+    );
+    return (v * w) / 100;
+  }
+
+  function vmin(v) {
+    return Math.min(vh(v), vw(v));
+  }
+
+  function vmax(v) {
+    return Math.max(vh(v), vw(v));
+  }
+
+  function getMainContainerWidth(v) {
+    const w = mainContainer[0].clientWidth;
+    return (v * w) / 100;
   }
 });
