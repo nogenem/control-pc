@@ -21,6 +21,7 @@ $(function () {
     TOGGLED: 1,
     PRESSED: 2,
   };
+  const DEFAULT_TIMEOUT_FOR_HANDLING_KEYBOARD_EVENTS = 50; //ms
 
   const mainContainer = $('#main-container');
   const textarea = $('#text-command');
@@ -276,17 +277,12 @@ $(function () {
 
     setTimeout(() => {
       handleOnMouseDown_Keyboard(key);
-    }, 50);
+    }, DEFAULT_TIMEOUT_FOR_HANDLING_KEYBOARD_EVENTS);
 
     return true;
   }
 
-  function onMouseUp_Keyboard(e) {
-    const target = $(e.target).closest('button');
-    const key = `${target.data('key')}`;
-
-    e.preventDefault();
-
+  function handleOnMouseUp_Keyboard(key) {
     if (isModifierKey(key)) return true;
 
     if (!keyboardBtnData[key])
@@ -303,6 +299,22 @@ $(function () {
     keyboardBtnData[key].clicked = false;
 
     untoggleAllModifierKeys();
+  }
+
+  function onMouseUp_Keyboard(e) {
+    const target = $(e.target).closest('button');
+    const key = `${target.data('key')}`;
+
+    e.preventDefault();
+
+    setTimeout(() => {
+      handleOnMouseUp_Keyboard(key);
+
+      // Make it a bit late to try to guarantee that it will be handled
+      // after the MouseDown...
+    }, DEFAULT_TIMEOUT_FOR_HANDLING_KEYBOARD_EVENTS + DEFAULT_TIMEOUT_FOR_HANDLING_KEYBOARD_EVENTS / 2);
+
+    return true;
   }
 
   keyboardLayoutSelect.select2({ width: '100%', minimumResultsForSearch: -1 });
