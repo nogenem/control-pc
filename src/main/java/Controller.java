@@ -194,7 +194,7 @@ public class Controller {
 		float sensibility = 1.0f;
 		try {
 			sensibility = Float.parseFloat(params.getString("sensibility"));
-		} catch (NumberFormatException ex) {
+		} catch (NumberFormatException | NullPointerException ex) {
 		}
 
 		String button = params.getString("button");
