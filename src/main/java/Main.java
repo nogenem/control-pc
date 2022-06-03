@@ -46,7 +46,7 @@ public class Main {
 			String msg = e.getMessage();
 
 			System.err.println("Spark Uncaught Exception: ");
-			if (msg.contains("Connection reset"))
+			if (msg != null && msg.contains("Connection reset"))
 				System.err.println(msg);
 			else
 				e.printStackTrace();
