@@ -122,3 +122,7 @@
 #keyboard-wrapper button.underline {
     text-decoration: underline;
 }
+
+#keyboard-wrapper button i {
+    font-size: inherit;
+}
