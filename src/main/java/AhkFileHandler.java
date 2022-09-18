@@ -11,8 +11,8 @@ public class AhkFileHandler {
 		this.stop();
 
 		try {
-			Runtime rt = Runtime.getRuntime();
-			this.p = rt.exec(this.path);
+			ProcessBuilder pb = new ProcessBuilder(this.path);
+			this.p = pb.start();
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
