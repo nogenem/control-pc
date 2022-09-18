@@ -3,18 +3,23 @@ import java.net.InetAddress;
 import java.net.URL;
 import java.net.UnknownHostException;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import spark.Spark;
 
 public class Main {
 
 	private static String AHK_FILE = "SoundControl.exe";
-	private static String IP_ADRESS = Main.getIpAdress();
-	private static int PORT = 7777;
+	private static String IP_ADDRESS = Main.getIpAdress();
+
+	private static Dotenv dotenv = null;
+	private static int serverPort = 7777;
 
 	private static AhkFileHandler ahkFileHandler = null;
 	private static Controller controller = null;
 
 	public static void main(String[] args) throws AWTException {
+		Main.loadEnv();
+
 		Main.controller = new Controller();
 		Main.ahkFileHandler = new AhkFileHandler(Main.AHK_FILE);
 
@@ -23,12 +28,22 @@ public class Main {
 		Main.setupRoutes();
 		Main.registerShutdownThread();
 
-		System.out.println(
-				"Server started at http://localhost:" + Main.PORT + " and http://" + Main.IP_ADRESS + ":" + Main.PORT);
+		System.out.println(String.format(
+				"\n>> Server started at http://localhost:%d and http://%s:%d\n",
+				Main.serverPort, Main.IP_ADDRESS, Main.serverPort));
+	}
+
+	private static void loadEnv() {
+		Main.dotenv = Dotenv.configure().load();
+
+		String envPort = Main.dotenv.get("PORT");
+		if (envPort != null && !envPort.isEmpty()) {
+			Main.serverPort = Integer.parseInt(envPort);
+		}
 	}
 
 	private static void setupSpark() {
-		Spark.port(Main.PORT);
+		Spark.port(Main.serverPort);
 
 		if (!Main.isInsideJar()) {
 			String projectDir = System.getProperty("user.dir");
