@@ -13,6 +13,7 @@ public class Main {
 
 	private static Dotenv dotenv = null;
 	private static int serverPort = 7777;
+	private static Boolean serverIsSecure = false;
 
 	private static AhkFileHandler ahkFileHandler = null;
 	private static Controller controller = null;
@@ -29,8 +30,8 @@ public class Main {
 		Main.registerShutdownThread();
 
 		System.out.println(String.format(
-				"\n>> Server started at http://localhost:%d and http://%s:%d\n",
-				Main.serverPort, Main.IP_ADDRESS, Main.serverPort));
+				"\n>> Server started at http://localhost:%d and %s://%s:%d\n",
+				Main.serverPort, Main.serverIsSecure ? "https" : "http", Main.IP_ADDRESS, Main.serverPort));
 	}
 
 	private static void loadEnv() {
@@ -44,6 +45,15 @@ public class Main {
 
 	private static void setupSpark() {
 		Spark.port(Main.serverPort);
+
+		String keystoreFilename = Main.dotenv.get("KEYSTORE_FILENAME");
+		String keystorePassword = Main.dotenv.get("KEYSTORE_PASSWORD");
+
+		if (keystoreFilename != null && !keystoreFilename.isEmpty() && keystorePassword != null
+				&& !keystorePassword.isEmpty()) {
+			Spark.secure(keystoreFilename, keystorePassword, null, null);
+			Main.serverIsSecure = true;
+		}
 
 		if (!Main.isInsideJar()) {
 			String projectDir = System.getProperty("user.dir");
