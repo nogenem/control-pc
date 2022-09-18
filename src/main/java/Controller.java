@@ -16,7 +16,6 @@ public class Controller {
 		this.robot = new BetterRobot();
 	}
 
-	// http://sparkjava.com/
 	public String exec(Request req, Response res) {
 		MultiMap<String> params = new MultiMap<String>();
 		UrlEncoded.decodeTo(req.body(), params, "UTF-8");

@@ -16,7 +16,7 @@ public class KeyboardLayoutManager {
     // https://github.com/holgerbrandl/windowlicker/blob/master/src/core/main/com/objogate/wl/keyboard/KeyboardLayout.java
 
     public final static String DEFAULT_LAYOUT = "ABNT2";
-    // Its gets from the classpath: target/classes/...
+    // It gets from the classpath: target/classes/...
     public final static String LAYOUTS_BASE_PATH = "public/keyboardLayouts";
 
     private Map<String, Map<String, int[][]>> keyboardLayoutsMap;

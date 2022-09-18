@@ -67,7 +67,7 @@ public class Main {
 				e.printStackTrace();
 
 			res.status(500);
-			res.body("Ocorreu um erro no servidor¹.");
+			res.body("An error occurred on the server.");
 		}); // print all exceptions
 	}
 
@@ -107,7 +107,6 @@ public class Main {
 			InetAddress inetAddress = InetAddress.getLocalHost();
 			return inetAddress.getHostAddress();
 		} catch (UnknownHostException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 			return "";
 		}
