@@ -1,5 +1,5 @@
 <h1 align="center">
-    Control-pc
+  Control-pc
 </h1>
 <h4 align="center">
   A simple way to control your pc using a cellphone.
@@ -14,9 +14,9 @@ I wanted a way to control my pc while i'm lying in bed, without the use of a wir
 
 ## The solution
 
-Considering that i wanted to play/pause the video and control the volume, i thought that the best way to do this is using the Fn keys on the keyboard. After searching the simplest way to do it, using the programming languages that i already know, i ended with the combination of [Java](https://www.java.com/) + [Autohotkey](https://www.autohotkey.com/). I use [Java](https://www.java.com/) for the server and basic keyboard/mouse controls and [Autohotkey](https://www.autohotkey.com/) to trigger the Fn keys, since i couldn't find an easy way to do this with [Java](https://www.java.com/).
+Considering that i wanted to play/pause the video and control the volume, i thought that the best way to do this is using the Fn keys on the keyboard. After searching the simplest way to do it, using the programming languages that i already know, i ended with the combination of Java + Autohotkey. I use Java for the server and basic keyboard/mouse controls and Autohotkey to trigger the Fn keys, since i couldn't find an easy way to do this with Java.
 
-The easiest way that i found to access the server, running on my PC, from my cellphone is by [fixing](https://portforward.com/networking/static-ip-windows-10.htm) my IP address. After doing that, i can simply use that IP to access a front-end page that i made with HTML+JS+Jquery which contains some controls that send the commands to the server.
+The easiest way that i found to access the server, running on my PC, from my cellphone is by [fixing](https://portforward.com/networking/static-ip-windows-10.htm) my IP address. After doing that, i can simply use that IP to access a front-end page that i made with HTML + Javascript + JQuery which contains some controls that send the commands to the server.
 
 ## Technologies
 
@@ -25,14 +25,14 @@ The easiest way that i found to access the server, running on my PC, from my cel
 - [Autohotkey](https://www.autohotkey.com/)
 - [Jquery](https://jquery.com/)
 
-## Requirements
+## Requirements for development
 
 - [Java 1.8+](https://www.java.com/)
 - [Java JDK 1.8+](https://www.oracle.com/br/java/technologies/javase/javase-jdk8-downloads.html)
 - [Autohotkey](https://www.autohotkey.com/)
-- Some IDE with [Maven](https://maven.apache.org/index.html), like [Eclipse](https://www.eclipse.org/)
+- Some IDE with [Maven](https://maven.apache.org/index.html), like [Eclipse](https://www.eclipse.org/) or [VS Code](https://code.visualstudio.com/)
 
-## How to use
+## How to run the project for development
 
 1. Clone the repository:
 
@@ -58,6 +58,37 @@ $ keytool -genkey -alias control-pc -keyalg RSA -keystore KeyStore.jks -keysize 
 
 4. Open the Main.java file and click on "Run as...".
 5. You can now open [http://localhost:7777/](http://localhost:7777/) and start controlling your PC.
+
    - If you [fixed](https://portforward.com/networking/static-ip-windows-10.htm) your IP address, you can access the front-end on your cellphone too, using the same port (7777).
 
-**_obs_**: If you just want to run the project, you could download the [latest release](https://github.com/nogenem/control-pc/releases) to try it. You will still need to fulfill the requirements.
+## Requirements to run the compiled version
+
+- [Java 1.8+](https://www.java.com/)
+- [Java JDK 1.8+](https://www.oracle.com/br/java/technologies/javase/javase-jdk8-downloads.html)
+- [Autohotkey](https://www.autohotkey.com/)
+
+## How to run the compiled version
+
+1. Download the [latest release](https://github.com/nogenem/control-pc/releases).
+2. Extract the .zip file.
+3. Open a terminal and navigate to the extracted folder.
+
+```shell
+cd /path/to/control-pc
+```
+
+4. Execute the following command:
+
+```shell
+java -jar control-pc.jar
+```
+
+5. You can now open [http://localhost:7777/](http://localhost:7777/) and start controlling your PC.
+
+   - If you [fixed](https://portforward.com/networking/static-ip-windows-10.htm) your IP address, you can access the front-end on your cellphone too, using the same port (7777).
+
+## Full image of the project
+
+<p align="center">
+  <img alt="Full cellphone view" src="https://user-images.githubusercontent.com/2437497/225752633-41ef32b2-ab07-4b6a-adb3-cd17768c975d.png"/>
+</p>
